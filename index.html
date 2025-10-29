@@ -229,6 +229,60 @@
         .card-script .card-body .stage-time { font-size: 0.9em; color: #7f8c8d; font-style: italic; }
         .card-script .card-body .you { font-weight: bold; color: #16a085; }
         .card-script .card-body .prospect { font-weight: bold; color: #2980b9; }
+        /* --- UPDATED: Style for Tone/Pacing notes --- */
+        .card-script .card-body .tone-note {
+            font-style: italic;
+            font-size: 0.9em;
+            color: #555; /* Slightly darker text */
+            background-color: #fdf0d5; /* Light orange background */
+            padding: 8px 12px;
+            border-radius: 4px;
+            margin-top: 8px;
+            margin-bottom: 15px;
+            display: block;
+            border-left: 4px solid #e67e22; /* Orange left border */
+            font-weight: bold; /* Make text bold */
+        }
+        .card-dig .card-body .tone-note { /* Apply same style to dig deeper card */
+             font-style: italic;
+            font-size: 0.9em;
+            color: #555; /* Slightly darker text */
+            background-color: #fdf0d5; /* Light orange background */
+            padding: 8px 12px;
+            border-radius: 4px;
+            margin-top: 8px;
+            margin-bottom: 15px;
+            display: block;
+            border-left: 4px solid #e67e22; /* Orange left border */
+            font-weight: bold; /* Make text bold */
+        }
+        .card-how .card-body .tone-note { /* Apply same style to how-to cards */
+             font-style: italic;
+            font-size: 0.9em;
+            color: #555; /* Slightly darker text */
+            background-color: #fdf0d5; /* Light orange background */
+            padding: 8px 12px;
+            border-radius: 4px;
+            margin-top: 8px;
+            margin-bottom: 15px;
+            display: block;
+            border-left: 4px solid #e67e22; /* Orange left border */
+            font-weight: bold; /* Make text bold */
+        }
+         .card-example .card-body .tone-note { /* Apply same style to example card */
+             font-style: italic;
+            font-size: 0.9em;
+            color: #555; /* Slightly darker text */
+            background-color: #fdf0d5; /* Light orange background */
+            padding: 8px 12px;
+            border-radius: 4px;
+            margin-top: 8px;
+            margin-bottom: 15px;
+            display: block;
+            border-left: 4px solid #e67e22; /* Orange left border */
+            font-weight: bold; /* Make text bold */
+        }
+
 
         /* --- STYLES FOR "DIG DEEPER" CARD --- */
         .card-dig .card-header { background-color: #fef5e7; }
@@ -618,6 +672,7 @@
 
                             <!-- ADDED: Initial Opening Section -->
                             <div class="stage-header">Initial Opening <span class="stage-time">(First 15 Seconds)</span></div>
+                             <div class="tone-note">Tone: Calm, neutral, professional. Pacing: Normal.</div>
                              <ul>
                                 <li>
                                     <span class="you">You:</span> "Hi, is this [Lead Name]?"
@@ -637,32 +692,40 @@
                             <!-- END: Initial Opening Section -->
 
                             <div class="stage-header">1. Connecting / Situation <span class="stage-time">(~0-1 Minute After Opening)</span></div>
+                             <div class="tone-note">Tone: Curious, neutral (like a doctor gathering initial facts). Pacing: Normal, slightly slower than opening.</div>
                              <ul>
                                 <li>
                                     <span class="you">You:</span> "Great. So, you were looking into [GPS Tracking / Dash Cams]... **What are you doing now...** for that?"<a href="blackbook.pdf#page=11" target="_blank" class="cite-link">[p. 11]</a>
                                     <span class="note">Goal: Establish their current state quickly.</span>
                                 </li>
+                                 <li> <!-- ADDED VEHICLE COUNT QUESTION -->
+                                    <span class="you">You:</span> "Okay, and **roughly how many vehicles** are you running right now?"
+                                    <span class="note">Keep tone neutral and factual here.</span>
+                                 </li>
                              </ul>
 
-                            <div class="stage-header">2. Problem Awareness <span class="stage-time">(~1-5 Minutes)</span></div>
+                            <div class="stage-header">2. Problem Awareness <span class="stage-time">(~1-5 Minutes - MOST IMPORTANT STAGE)</span></div>
+                              <div class="tone-note">Tone: Shift to genuinely curious, maybe slightly confused or skeptical, especially on follow-up probes. Pacing: Slow down here. Use pauses after their answers. Let them feel the weight of their own words.</div>
                              <ul>
                                 <li>
                                     <span class="you">You:</span> "Gotcha. And **what do you like or... what *don't* you like** about [calling drivers / using Airtags / current system]?"<a href="blackbook.pdf#page=12" target="_blank" class="cite-link">[p. 12]</a>
                                     <span class="note">Focus on the "don't like." Use probing questions below to dig.</span>
                                 </li>
                                  <li>
-                                     <span class="you">You (Probing):</span> "When you say [it's a hassle / the reporting isn't great], **how do you mean exactly?**"<a href="blackbook.pdf#page=22" target="_blank" class="cite-link">[p. 22]</a>
+                                     <span class="you">You (Probing):</span> "When you say [it's a hassle / the reporting isn't great], **how do you mean exactly?**"<a href="blackbook.pdf#page=22" target="_blank" class="cite-link">[p. 22]</a> <span class="tone-note">Tone: Lean in slightly, sound genuinely curious/confused.</span>
                                  </li>
                                 <li>
-                                     <span class="you">You (Probing):</span> "**What's causing that issue?**"<a href="blackbook.pdf#page=22" target="_blank" class="cite-link">[p. 22]</a>
+                                     <span class="you">You (Probing):</span> "**What's causing that issue?**"<a href="blackbook.pdf#page=22" target="_blank" class="cite-link">[p. 22]</a> <span class="tone-note">Tone: Curious detective.</span>
                                 </li>
                                  <li>
                                      <span class="you">You (Probing - The KEY Pain Question):</span> "**Has that had an impact on you? In what way?**"<a href="blackbook.pdf#page=12" target="_blank" class="cite-link">[p. 12]</a>
                                     <span class="note">Listen for $$$, time wasted, frustration, customer complaints, risk.</span>
+                                    <span class="tone-note">Tone: Empathetic but neutral. Pacing: Slow down, pause after asking.</span>
                                 </li>
                              </ul>
 
                             <div class="stage-header">3. Solution Awareness <span class="stage-time">(~1-2 Minutes)</span></div>
+                             <div class="tone-note">Tone: Collaborative, curious. Pacing: Normal.</div>
                             <ul>
                                 <li>
                                     <span class="you">You:</span> "Okay, I see. So, **what have you done about changing this, if anything?**"<a href="blackbook.pdf#page=13" target="_blank" class="cite-link">[p. 13]</a>
@@ -675,14 +738,16 @@
                             </ul>
                             
                             <div class="stage-header">4. Consequence <span class="stage-time">(~1 Minute)</span></div>
+                              <div class="tone-note">Tone: Serious, slightly concerned (but NOT fear-mongering). Pacing: Slow, deliberate.</div>
                              <ul>
                                 <li>
                                     <span class="you">You:</span> "That makes sense. **What if you don't do anything about this problem** and [repeat the pain - fuel costs stay high / you keep wasting time / customer complaints continue]?"<a href="blackbook.pdf#page=14" target="_blank" class="cite-link">[p. 14]</a>
-                                    <span class="note">Build urgency by focusing on the negative future.</span>
+                                    <span class="note">Build urgency by focusing on the negative future. Let them sit with the question.</span>
                                 </li>
                              </ul>
                              
                             <div class="stage-header">5. Qualifying <span class="stage-time">(~1 Minute)</span></div>
+                              <div class="tone-note">Tone: Direct but neutral for the first question. Shift to skeptical/curious for "Why now?". Pacing: Normal, pause after "Why now?".</div>
                              <ul>
                                 <li>
                                     <span class="you">You:</span> "So, **how important is it for you to solve this problem?**"<a href="blackbook.pdf#page=14" target="_blank" class="cite-link">[p. 14]</a>
@@ -694,6 +759,7 @@
                              </ul>
                              
                              <div class="stage-header">6. Uncover Decision Process <span class="stage-time">(~1 Minute)</span></div>
+                              <div class="tone-note">Tone: Neutral, information-gathering, like checking boxes. Pacing: Normal.</div>
                              <ul>
                                  <li>
                                      <span class="you">You:</span> "Before I show you how we might be able to help... **Can you walk me through the criteria you use** when picking a company for something like this?"<a href="blackbook.pdf#page=24" target="_blank" class="cite-link">[p. 24]</a>
@@ -705,6 +771,7 @@
                              </ul>
 
                             <div class="stage-header">7. Transition <span class="stage-time">(~30 Seconds)</span></div>
+                             <div class="tone-note">Tone: Helpful, bridging. Ask "Why do you feel it is though?" with genuine curiosity/slight skepticism - make them convince YOU. Pacing: Smooth, connecting pace.</div>
                             <ul>
                                 <li>
                                     <span class="you">You:</span> "Okay, based on what you told me about [problem 1] and how it's making you feel [emotion/impact], and how you're looking for [their ideal solution]... what we do might actually work for you... [Briefly mention the core benefit related to their pain]... **Does that feel as if it might be what you're looking for?**"<a href="blackbook.pdf#page=15" target="_blank" class="cite-link">[p. 15]</a>
@@ -717,6 +784,7 @@
                              </ul>
                              
                              <div class="stage-header">8. "Presenting" / Confirming <span class="stage-time">(~2-5+ Minutes)</span></div>
+                              <div class="tone-note">Tone: Collaborative, confirming, checking understanding. Pacing: Conversational, use pauses after each "Checking" question.</div>
                              <ul>
                                  <li>
                                      <span class="note">Only NOW do you briefly show/explain *only* the parts of Verizon Connect that solve their *specific* stated problems. Use "Checking for Agreement" questions constantly.</span><a href="blackbook.pdf#page=39" target="_blank" class="cite-link">[p. 39]</a>
@@ -726,6 +794,7 @@
                              </ul>
                              
                             <div class="stage-header">9. Committing <span class="stage-time">(~1-2 Minutes)</span></div>
+                             <div class="tone-note">Tone: Calmly assumptive for "The Close" statement. Ask "Why though?" with curiosity. Final question ("Would that be appropriate?") is neutral, low-pressure, giving them control. Pacing: Calm, clear, slightly slower.</div>
                             <ul>
                                 <li>
                                     <span class="you">You:</span> "So, **do you feel like this could be the answer for you?**"<a href="blackbook.pdf#page=15" target="_blank" class="cite-link">[p. 15]</a>
@@ -753,6 +822,7 @@
                         <div class="card-body">
                             <span class="principle">
                                 Use these when you get short, logical, or vague answers during the "Problem Awareness" stage. These questions find the *emotion* and *pain*.<a href="blackbook.pdf#page=22" target="_blank" class="cite-link">[p. 22]</a>
+                                <span class="tone-note">Tone: Genuinely curious, slightly confused, skeptical. Pacing: Slow down, use pauses.</span>
                             </span>
                             <ul>
                                 <li>
@@ -792,6 +862,7 @@
                         <div class="card-body">
                             <span class="principle">
                                 Use these *before* the transition (Stage 6 in the Framework) to understand *how* they buy, so you don't get stuck later.<a href="blackbook.pdf#page=24" target="_blank" class="cite-link">[p. 24]</a>
+                                <span class="tone-note">Tone: Neutral, information-gathering. Pacing: Normal.</span>
                             </span>
                             <ul>
                                 <li>
@@ -819,6 +890,7 @@
                         <div class="card-body">
                             <span class="principle">
                                 During Stage 8 of the Framework, your "presentation" is just proving you can solve their stated problems. Ask these "Checking for Agreement" questions *constantly*.<a href="blackbook.pdf#page=39" target="_blank" class="cite-link">[p. 39]</a>
+                                <span class="tone-note">Tone: Collaborative, confirming. Pacing: Conversational, pause after each question.</span>
                             </span>
                             <ul>
                                 <li>"<strong>Does that make sense?</strong>"</li>
@@ -841,6 +913,7 @@
                         <div class="card-body">
                             <span class="principle">
                                 Use this when the prospect says "I don't have time," "Call me back," or "Just send pricing." Your pivots lead here to rapidly find pain.
+                                <span class="tone-note">Tone: Start neutral, shift to curious/skeptical during pain discovery, become concerned during consequence, then calmly assumptive at the close. Pacing: Faster than normal framework, but *slow down* during pain/consequence questions.</span>
                             </span>
                             
                             <!-- SCENARIO A -->
