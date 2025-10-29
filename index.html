@@ -48,14 +48,14 @@
             padding: 30px 40px;
         }
 
-        /* --- NEW: Two-Column Grid Layout --- */
+        /* --- Two-Column Grid Layout --- */
         .cheatsheet-grid {
             display: grid;
             grid-template-columns: 1fr 1fr; /* Two equal columns */
             gap: 30px;
         }
         
-        /* --- NEW: Column Headers --- */
+        /* --- Column Headers --- */
         .column-header {
             font-size: 1.8em;
             font-weight: 600;
@@ -65,7 +65,7 @@
             margin-bottom: 20px;
         }
 
-        /* --- NEW: SVG Icon Styles --- */
+        /* --- SVG Icon Styles --- */
         .card-icon {
             width: 20px;
             height: 20px;
@@ -183,7 +183,7 @@
             padding-left: 10px;
         }
         
-        /* --- NEW: Style for Cite Links --- */
+        /* --- Style for Cite Links --- */
         .cite-link {
             font-size: 0.8em;
             color: #3498db;
@@ -218,6 +218,18 @@
         .card-how .card-header::after { color: #8e44ad; }
         .card-how .card-body li::before { color: #8e44ad; }
         
+        /* --- STYLES FOR "SCRIPT" CARD (PURPLE) --- */
+        .card-script { /* Inherits from card-how */ }
+        .card-script .card-header { background-color: #f4eef7; }
+        .card-script .card-header h2 { color: #8e44ad; font-style: normal; font-weight: 600; }
+        .card-script[open] .card-header { background-color: #f0e6f5; }
+        .card-script .card-header::after { color: #8e44ad; }
+        .card-script .card-body li::before { color: #8e44ad; }
+        .card-script .card-body .stage-header { font-weight: bold; color: #8e44ad; margin-top: 20px; font-size: 1.1em; }
+        .card-script .card-body .stage-time { font-size: 0.9em; color: #7f8c8d; font-style: italic; }
+        .card-script .card-body .you { font-weight: bold; color: #16a085; }
+        .card-script .card-body .prospect { font-weight: bold; color: #2980b9; }
+
         /* --- STYLES FOR "DIG DEEPER" CARD --- */
         .card-dig .card-header { background-color: #fef5e7; }
         .card-dig .card-header h2 { color: #e67e22; font-style: normal; font-weight: 600; }
@@ -229,6 +241,46 @@
         .card-budget .card-header { background-color: #f8f9f9; }
         .card-budget .card-header h2 { color: #2980b9; font-style: italic; }
         .card-budget .card-header::after { color: #2980b9; }
+        
+        /* --- STYLES FOR "EXAMPLE" CARD (BLUE) --- */
+        .card-example .card-header { background-color: #f0f6ff; }
+        .card-example .card-header h2 { color: #2e86de; font-style: normal; font-weight: 600; }
+        .card-example[open] .card-header { background-color: #e4eefe; }
+        .card-example .card-header::after { color: #2e86de; }
+        .card-example .card-body li::before { color: #2e86de; }
+        .card-example .card-body strong { color: #16a085; }
+        .card-example .card-body .example-dialog { background: #f4f7f6; padding: 15px; border-radius: 8px; margin-top: 10px; }
+        .card-example .card-body .you { font-weight: bold; color: #16a085; }
+        .card-example .card-body .prospect { font-weight: bold; color: #2980b9; }
+        
+        /* --- Style for Example Timestamps --- */
+        .example-dialog .timestamp {
+            display: block;
+            font-weight: bold;
+            color: #34495e;
+             margin-top: 15px; /* Added margin-top */
+            margin-bottom: 5px;
+            font-size: 0.9em;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+        }
+        .example-dialog p:first-of-type {
+             margin-top: 0; 
+        }
+        
+        /* --- Style for Scenario Headers --- */
+        .scenario-header {
+            font-weight: bold;
+            color: #2c3e50;
+            margin-top: 20px;
+            padding-top: 15px;
+            border-top: 1px dashed #bdc3c7;
+        }
+        .scenario-header:first-of-type {
+            margin-top: 0;
+            padding-top: 0;
+            border-top: none;
+        }
         
         /* --- STYLES FOR THE "GO" CARD --- */
         .card-go .card-header { background-color: #e8f8f5; }
@@ -312,6 +364,18 @@
             <polyline points="12 16 16 12 12 8"></polyline>
             <line x1="8" y1="12" x2="16" y2="12"></line>
         </symbol>
+        <symbol id="icon-clock" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <circle cx="12" cy="12" r="10"></circle>
+            <polyline points="12 6 12 12 16 14"></polyline>
+        </symbol>
+        <!-- NEW ICON ADDED -->
+        <symbol id="icon-script" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"></path>
+            <polyline points="14 2 14 8 20 8"></polyline>
+            <line x1="16" y1="13" x2="8" y2="13"></line>
+            <line x1="16" y1="17" x2="8" y2="17"></line>
+            <polyline points="10 9 9 9 8 9"></polyline>
+        </symbol>
     </svg>
 
     <div class="container">
@@ -340,6 +404,7 @@
                             <ul>
                                 <li>
                                     "That's not a problem. Just so I can put together the *best* information for you, <strong>what exactly are you looking for?</strong>"
+                                    <span class="note">This often leads into the "Accelerated NEPQ" flow.</span>
                                 </li>
                                 <li>
                                     "I'd be open to putting together a proposal for you, but <strong>I'm not quite sure I could even help you yet</strong>...
@@ -363,11 +428,12 @@
                     <details class="card card-budget">
                         <summary class="card-header">
                             <svg class="card-icon" style="stroke: #2980b9;"><use href="#icon-pause"></use></svg>
-                            <h2>"I'm too busy right now."</h2>
+                            <h2>"I don't have time right now / Call me back."</h2>
                         </summary>
                         <div class="card-body">
                             <span class="principle">
                                 Core NEPQ Principle: A "Trusted Authority's" time is also valuable. Do not be "needy". Establish professional posture and set a *firm* next step.<a href="blackbook.pdf#page=46" target="_blank" class="cite-link">[p. 46]</a>
+                                <span class="note">Use these *first*. If they still resist, you can *try* the "Accelerated NEPQ" flow.</span>
                             </span>
                             <ul>
                                 <li>
@@ -378,6 +444,9 @@
                                 </li>
                                 <li>
                                     "If you have your calendar handy, I could pull out mine to <strong>book a specific time with you</strong> just so you don't have to chase me down and vice versa... <strong>would that be appropriate?</strong>"
+                                </li>
+                                <li>
+                                     <span class="note">If they resist scheduling: "I understand you're busy. Would you have just 60 seconds if I asked one quick question to see if it even makes sense for us to talk later?" (Then try the Accelerated NEPQ flow).</span>
                                 </li>
                             </ul>
                         </div>
@@ -535,6 +604,145 @@
                             </ul>
                         </div>
                     </details>
+
+                    <!-- CARD (13): INBOUND CALL FRAMEWORK -->
+                    <details class="card card-script" open> <!-- Open by default -->
+                         <summary class="card-header">
+                            <svg class="card-icon" style="stroke: #8e44ad;"><use href="#icon-script"></use></svg>
+                            <h2>Inbound Call Framework (One-Call Close)</h2>
+                        </summary>
+                       <div class="card-body">
+                            <span class="principle">
+                                Use this framework AFTER you successfully pivot past an initial brush-off. Acknowledge their interest, then dive into diagnosis.
+                            </span>
+
+                            <!-- ADDED: Initial Opening Section -->
+                            <div class="stage-header">Initial Opening <span class="stage-time">(First 15 Seconds)</span></div>
+                             <ul>
+                                <li>
+                                    <span class="you">You:</span> "Hi, is this [Lead Name]?"
+                                    <span class="note">(Wait for confirmation)</span>
+                                </li>
+                                 <li>
+                                     <span class="you">You:</span> "Hi [Lead Name], this is [Your Name] calling from Verizon Connect on a recorded line. You had put in a request online just a bit ago about our [GPS Tracking / Dash Cams]... Is now still okay for a quick chat?"
+                                    <span class="note">This references *their* action.</span>
+                                </li>
+                                 <li>
+                                     <span class="note">➡️ If they say "No, I'm busy" or "Just send pricing" -> Use the **Brush-off Pivots** in Column 1.</span>
+                                 </li>
+                                 <li>
+                                      <span class="note">➡️ If they say "Yes" or anything neutral -> Proceed to Stage 1 below.</span>
+                                 </li>
+                             </ul>
+                            <!-- END: Initial Opening Section -->
+
+                            <div class="stage-header">1. Connecting / Situation <span class="stage-time">(~0-1 Minute After Opening)</span></div>
+                             <ul>
+                                <li>
+                                    <span class="you">You:</span> "Great. So, you were looking into [GPS Tracking / Dash Cams]... **What are you doing now...** for that?"<a href="blackbook.pdf#page=11" target="_blank" class="cite-link">[p. 11]</a>
+                                    <span class="note">Goal: Establish their current state quickly.</span>
+                                </li>
+                             </ul>
+
+                            <div class="stage-header">2. Problem Awareness <span class="stage-time">(~1-5 Minutes)</span></div>
+                             <ul>
+                                <li>
+                                    <span class="you">You:</span> "Gotcha. And **what do you like or... what *don't* you like** about [calling drivers / using Airtags / current system]?"<a href="blackbook.pdf#page=12" target="_blank" class="cite-link">[p. 12]</a>
+                                    <span class="note">Focus on the "don't like." Use probing questions below to dig.</span>
+                                </li>
+                                 <li>
+                                     <span class="you">You (Probing):</span> "When you say [it's a hassle / the reporting isn't great], **how do you mean exactly?**"<a href="blackbook.pdf#page=22" target="_blank" class="cite-link">[p. 22]</a>
+                                 </li>
+                                <li>
+                                     <span class="you">You (Probing):</span> "**What's causing that issue?**"<a href="blackbook.pdf#page=22" target="_blank" class="cite-link">[p. 22]</a>
+                                </li>
+                                 <li>
+                                     <span class="you">You (Probing - The KEY Pain Question):</span> "**Has that had an impact on you? In what way?**"<a href="blackbook.pdf#page=12" target="_blank" class="cite-link">[p. 12]</a>
+                                    <span class="note">Listen for $$$, time wasted, frustration, customer complaints, risk.</span>
+                                </li>
+                             </ul>
+
+                            <div class="stage-header">3. Solution Awareness <span class="stage-time">(~1-2 Minutes)</span></div>
+                            <ul>
+                                <li>
+                                    <span class="you">You:</span> "Okay, I see. So, **what have you done about changing this, if anything?**"<a href="blackbook.pdf#page=13" target="_blank" class="cite-link">[p. 13]</a>
+                                    <span class="note">Find out if they've tried other things and failed.</span>
+                                </li>
+                                <li>
+                                    <span class="you">You:</span> "And ideally, **what would you do about it if you could, though?**"<a href="blackbook.pdf#page=13" target="_blank" class="cite-link">[p. 13]</a>
+                                    <span class="note">Let them describe their perfect solution.</span>
+                                </li>
+                            </ul>
+                            
+                            <div class="stage-header">4. Consequence <span class="stage-time">(~1 Minute)</span></div>
+                             <ul>
+                                <li>
+                                    <span class="you">You:</span> "That makes sense. **What if you don't do anything about this problem** and [repeat the pain - fuel costs stay high / you keep wasting time / customer complaints continue]?"<a href="blackbook.pdf#page=14" target="_blank" class="cite-link">[p. 14]</a>
+                                    <span class="note">Build urgency by focusing on the negative future.</span>
+                                </li>
+                             </ul>
+                             
+                            <div class="stage-header">5. Qualifying <span class="stage-time">(~1 Minute)</span></div>
+                             <ul>
+                                <li>
+                                    <span class="you">You:</span> "So, **how important is it for you to solve this problem?**"<a href="blackbook.pdf#page=14" target="_blank" class="cite-link">[p. 14]</a>
+                                </li>
+                                <li>
+                                     <span class="you">You (Crucial follow-up):</span> "**Why is that important to you *now* though?**"<a href="blackbook.pdf#page=14" target="_blank" class="cite-link">[p. 14]</a>
+                                     <span class="note">This confirms their urgency and emotional driver.</span>
+                                </li>
+                             </ul>
+                             
+                             <div class="stage-header">6. Uncover Decision Process <span class="stage-time">(~1 Minute)</span></div>
+                             <ul>
+                                 <li>
+                                     <span class="you">You:</span> "Before I show you how we might be able to help... **Can you walk me through the criteria you use** when picking a company for something like this?"<a href="blackbook.pdf#page=24" target="_blank" class="cite-link">[p. 24]</a>
+                                 </li>
+                                  <li>
+                                     <span class="you">You:</span> "And besides yourself, **who else might be involved** in making a final decision?"<a href="blackbook.pdf#page=31" target="_blank" class="cite-link">[p. 31]</a>
+                                     <span class="note">Don't skip this - avoids "I need to talk to my boss" later.</span>
+                                 </li>
+                             </ul>
+
+                            <div class="stage-header">7. Transition <span class="stage-time">(~30 Seconds)</span></div>
+                            <ul>
+                                <li>
+                                    <span class="you">You:</span> "Okay, based on what you told me about [problem 1] and how it's making you feel [emotion/impact], and how you're looking for [their ideal solution]... what we do might actually work for you... [Briefly mention the core benefit related to their pain]... **Does that feel as if it might be what you're looking for?**"<a href="blackbook.pdf#page=15" target="_blank" class="cite-link">[p. 15]</a>
+                                    <span class="note">Do NOT pitch features here. Just bridge their pain to the result.</span>
+                                </li>
+                                <li>
+                                    <span class="you">You (Crucial follow-up):</span> "**Why do you feel like it is though?**"<a href="blackbook.pdf#page=15" target="_blank" class="cite-link">[p. 15]</a>
+                                    <span class="note">Makes them sell themselves on why it's a fit.</span>
+                                </li>
+                             </ul>
+                             
+                             <div class="stage-header">8. "Presenting" / Confirming <span class="stage-time">(~2-5+ Minutes)</span></div>
+                             <ul>
+                                 <li>
+                                     <span class="note">Only NOW do you briefly show/explain *only* the parts of Verizon Connect that solve their *specific* stated problems. Use "Checking for Agreement" questions constantly.</span><a href="blackbook.pdf#page=39" target="_blank" class="cite-link">[p. 39]</a>
+                                     <span class="you">You:</span> "...so you can see the live map here... **Do you see how that could help you** avoid those customer calls?"<a href="blackbook.pdf#page=39" target="_blank" class="cite-link">[p. 39]</a>
+                                     <span class="you">You:</span> "...and this report shows idling time... **How do you see that helping you** the most with fuel costs?"<a href="blackbook.pdf#page=40" target="_blank" class="cite-link">[p. 40]</a>
+                                 </li>
+                             </ul>
+                             
+                            <div class="stage-header">9. Committing <span class="stage-time">(~1-2 Minutes)</span></div>
+                            <ul>
+                                <li>
+                                    <span class="you">You:</span> "So, **do you feel like this could be the answer for you?**"<a href="blackbook.pdf#page=15" target="_blank" class="cite-link">[p. 15]</a>
+                                </li>
+                                <li>
+                                     <span class="you">You (Crucial follow-up):</span> "**Why though?**"<a href="blackbook.pdf#page=15" target="_blank" class="cite-link">[p. 15]</a>
+                                     <span class="note">Again, makes them sell themselves.</span>
+                                </li>
+                                <li>
+                                     <span class="you">You (The Close):</span> "Well, I don't have anything else to go over with you, it looks like we possibly covered what you are looking for. Really, the next step is we make some type of arrangement... you can do wire or card, and at that point we will... [tell them the next steps after purchase]." <span class="note">(Adjust based on your process)</span><a href="blackbook.pdf#page=15" target="_blank" class="cite-link">[p. 15]</a>
+                                </li>
+                                <li>
+                                     <span class="you">You (Final Question):</span> "**Would that be appropriate, or how would you like to proceed from here?**"<a href="blackbook.pdf#page=16" target="_blank" class="cite-link">[p. 16]</a>
+                                </li>
+                             </ul>
+                        </div>
+                    </details>
                     
                     <!-- CARD 8: DIG DEEPER -->
                     <details class="card card-dig">
@@ -544,7 +752,7 @@
                         </summary>
                         <div class="card-body">
                             <span class="principle">
-                                Use these when you get short, logical, or vague answers. These questions find the *emotion* and *pain*.<a href="blackbook.pdf#page=22" target="_blank" class="cite-link">[p. 22]</a>
+                                Use these when you get short, logical, or vague answers during the "Problem Awareness" stage. These questions find the *emotion* and *pain*.<a href="blackbook.pdf#page=22" target="_blank" class="cite-link">[p. 22]</a>
                             </span>
                             <ul>
                                 <li>
@@ -583,7 +791,7 @@
                         </summary>
                         <div class="card-body">
                             <span class="principle">
-                                Use these *before* the transition to understand *how* they buy, so you don't get stuck later.<a href="blackbook.pdf#page=24" target="_blank" class="cite-link">[p. 24]</a>
+                                Use these *before* the transition (Stage 6 in the Framework) to understand *how* they buy, so you don't get stuck later.<a href="blackbook.pdf#page=24" target="_blank" class="cite-link">[p. 24]</a>
                             </span>
                             <ul>
                                 <li>
@@ -610,7 +818,7 @@
                         </summary>
                         <div class="card-body">
                             <span class="principle">
-                                After the "Transition Question," your "presentation" is just proving you can solve their stated problems. Ask these "Checking for Agreement" questions *constantly*.<a href="blackbook.pdf#page=39" target="_blank" class="cite-link">[p. 39]</a>
+                                During Stage 8 of the Framework, your "presentation" is just proving you can solve their stated problems. Ask these "Checking for Agreement" questions *constantly*.<a href="blackbook.pdf#page=39" target="_blank" class="cite-link">[p. 39]</a>
                             </span>
                             <ul>
                                 <li>"<strong>Does that make sense?</strong>"</li>
@@ -624,56 +832,66 @@
                         </div>
                     </details>
                     
-                    <!-- CARD 11: THE ONE-CALL CLOSE FRAMEWORK -->
-                    <details class="card card-go">
+                    <!-- CARD (11) - ACCELERATED EXAMPLE -->
+                    <details class="card card-example" open> <!-- This card is open by default -->
                         <summary class="card-header">
-                            <svg class="card-icon" style="stroke: #16a085;"><use href="#icon-go"></use></svg>
-                            <h2>The One-Call Close Framework</h2>
+                            <svg class="card-icon" style="stroke: #2e86de;"><use href="#icon-clock"></use></svg>
+                            <h2>Accelerated NEPQ (Time Short / Price Focus)</h2>
                         </summary>
                         <div class="card-body">
                             <span class="principle">
-                                After you pivot, accelerate this entire NEPQ Dialogue Framework into one conversation.<a href="blackbook.pdf#page=10" target="_blank" class="cite-link">[p. 10]</a>
+                                Use this when the prospect says "I don't have time," "Call me back," or "Just send pricing." Your pivots lead here to rapidly find pain.
                             </span>
-                            <ul>
-                                <li>
-                                    <strong>Situation Questions</strong><a href="blackbook.pdf#page=11" target="_blank" class="cite-link">[p. 11]</a>
-                                    <span class="note example-dialog">
-                                        <span class="you">You:</span> "...<strong>What are you using now for your fleet?</strong>"
-                                        <br>
-                                        <span class="prospect">Prospect:</span> "I just use my phone and paper logs."
-                                    </span>
-                                </li>
-                                <li>
-                                    <strong>Problem Awareness Questions</strong><a href="blackbook.pdf#page=12" target="_blank" class="cite-link">[p. 12]</a>
-                                    <span class="note example-dialog">
-                                        <span class="you">You:</span> "And <strong>what do you like or... what *don't* you like</strong> about that?"
-                                    </span>
-                                </li>
-                                <li>
-                                    <strong>Consequence Questions</strong><a href="blackbook.pdf#page=14" target="_blank" class="cite-link">[p. 14]</a>
-                                    <span class="note example-dialog">
-                                        <span class="you">You:</span> "<strong>What if you don't do anything about this problem</strong> and your fuel costs keep going up?"
-                                    </span>
-                                </li>
-                                <li>
-                                    <strong>Qualifying Questions</strong><a href="blackbook.pdf#page=14" target="_blank" class="cite-link">[p. 14]</a>
-                                    <span class="note example-dialog">
-                                        <span class="you">You:</span> "<strong>How important is it for you to solve this problem? Why is that important to you *now* though?</strong>"
-                                    </span>
-                                </li>
-                                <li>
-                                    <strong>Transition Questions</strong><a href="blackbook.pdf#page=15" target="_blank" class="cite-link">[p. 15]</a>
-                                    <span class="note example-dialog">
-                                        <span class="you">You:</span> "Based on what you told me... [repeat their problems/feelings]... <strong>Does that feel as if it might be what you're looking for?</strong>"
-                                    </span>
-                                </li>
-                                <li>
-                                    <strong>Committing Questions</strong><a href="blackbook.pdf#page=15" target="_blank" class="cite-link">[p. 15]</a>
-                                    <span class="note example-dialog">
-                                        <span class="you">You:</span> "<strong>Do you feel like this could be the answer for you? Why though?</strong> ...Really, the next step is we make some type of arrangement..."
-                                    </span>
-                                </li>
-                            </ul>
+                            
+                            <!-- SCENARIO A -->
+                            <h3 class="scenario-header">Scenario A: "I just call my drivers."</h3>
+                            <div class="example-dialog">
+                                <span class="timestamp">Minute 0:00 - The Call Begins</span>
+                                <p><span class="you">You:</span> "Hi [Name], this is [Your Name] with Verizon Connect, how's it going?"</p>
+                                <p><span class="prospect">Prospect:</span> "Hey, I'm good, but I'm actually really busy right now. Can you just email me the pricing?"</p>
+                                <p><span class="you">You (Pivot):</span> "That's not a problem. Just so I send the *right* info, <strong>what are you using now</strong> to track your vehicles?"</p>
+                                <p><span class="prospect">Prospect:</span> "I just call my drivers when I need them."</p>
+                                <p><span class="you">You (Problem):</span> "Okay. And <strong>what do you like or... what *don't* you like</strong> about doing it that way?"</p>
+                                
+                                <span class="timestamp">Finding the PAIN</span>
+                                <p><span class="prospect">Prospect:</span> "Well, it's a hassle. Sometimes they don't answer, and I have to call multiple times. Plus, customers keep calling *me* asking where the truck is."</p>
+                                <p><span class="you">You (Dig Deeper):</span> "<strong>Has that had an impact on you? In what way?</strong> Having to call them multiple times and deal with customer calls?"</p>
+                                <p><span class="prospect">Prospect:</span> "Yeah, it wastes a ton of my time! And last week, a customer got angry because I couldn't give them an ETA, said we seemed unprofessional."</p>
+                                <p><span class="you">You (Consequence):</span> "<strong>What if you don't do anything about this</strong> and you keep wasting that time and customers keep getting frustrated?"</p>
+                                
+                                <span class="timestamp">Building Value & Urgency</span>
+                                <p><span class="prospect">Prospect:</span> "I can't keep doing that. I need to look professional and stop wasting time."</p>
+                                <p><span class="you">You (Qualify):</span> "So, <strong>how important is it for you to solve this problem... *now*?</strong>"</p>
+                                <p><span class="prospect">Prospect:</span> "Pretty important."</p>
+                                <p><span class="you">You (Transition):</span> "Okay. So, if I could show you a way to see exactly where all your drivers are on a map, in real-time, *without* having to call them, so you save time and can give customers exact ETAs... <strong>Does that feel as if it might be what you're looking for?</strong>"</p>
+                                <p><span class="prospect">Prospect:</span> "Yeah, that sounds much better."</p>
+                                <p><span class="you">You (Commit):</span> "<strong>Do you feel like this could be the answer for you?</strong> ...Really, the next step is..."</p>
+                            </div>
+
+                            <!-- SCENARIO B -->
+                            <h3 class="scenario-header">Scenario B: "I use Airtags / another basic tracker."</h3>
+                            <div class="example-dialog">
+                                <span class="timestamp">Minute 0:00 - The Call Begins</span>
+                                <p><span class="you">You:</span> "Hi [Name], this is [Your Name] with Verizon Connect, thanks for taking my call."</p>
+                                <p><span class="prospect">Prospect:</span> "Yeah, no problem. Look, I'm kinda swamped, I was really just looking for pricing on your GPS."</p>
+                                <p><span class="you">You (Pivot):</span> "I can get you that. Just so I send the right info, <strong>what are you using now</strong> to track?"</p>
+                                <p><span class="prospect">Prospect:</span> "We just use Airtags in the trucks."</p>
+                                <p><span class="you">You (Problem):</span> "Gotcha. And <strong>what do you like or... what *don't* you like</strong> about using Airtags?"</p>
+                                
+                                <span class="timestamp">Finding the PAIN</span>
+                                <p><span class="prospect">Prospect:</span> "They're okay for location, but they don't tell me anything else. I don't know how fast my guys are driving, or if they're braking hard, or how long they idle."</p>
+                                <p><span class="you">You (Dig Deeper):</span> "<strong>What's causing you</strong> to want to know those things, like speed or idling?"</p>
+                                <p><span class="prospect">Prospect:</span> "My fuel bill is insane! And my insurance just went up because one of my guys got into a fender bender."</p>
+                                <p><span class="you">You (Consequence):</span> "<strong>What if you don't do anything about this</strong> and your fuel costs stay high and insurance keeps going up?"</p>
+                                
+                                <span class="timestamp">Building Value & Urgency</span>
+                                <p><span class="prospect">Prospect:</span> "I can't afford that. I need to get those costs under control."</p>
+                                <p><span class="you">You (Qualify):</span> "So, <strong>how important is it for you to solve this problem... *now*?</strong>"</p>
+                                <p><span class="prospect">Prospect:</span> "Very important."</p>
+                                <p><span class="you">You (Transition):</span> "Okay. So, if I could show you a system that not only tracks location but also gives you reports on speed, idling, and harsh braking, helping you cut fuel costs and potentially lower insurance... <strong>Does that feel as if it might be what you're looking for?</strong>"</p>
+                                <p><span class="prospect">Prospect:</span> "Yes, definitely."</p>
+                                <p><span class="you">You (Commit):</span> "<strong>Do you feel like this could be the answer for you?</strong> ...Really, the next step is..."</p>
+                            </div>
                         </div>
                     </details>
                 </section>
