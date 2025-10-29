@@ -17,7 +17,7 @@
 
         /* Main Container */
         .container {
-            max-width: 900px;
+            max-width: 1400px; /* Widen container for two columns */
             margin: 0 auto;
             background: #ffffff;
             border-radius: 12px;
@@ -30,10 +30,11 @@
             padding: 30px 40px;
             background-color: #2c3e50;
             color: #ffffff;
+            border-bottom: 4px solid #3498db;
         }
         header h1 {
             margin: 0;
-            font-size: 2em;
+            font-size: 2.2em;
         }
         header p {
             margin: 10px 0 0;
@@ -45,6 +46,31 @@
         /* Main Content Area */
         main {
             padding: 30px 40px;
+        }
+
+        /* --- NEW: Two-Column Grid Layout --- */
+        .cheatsheet-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr; /* Two equal columns */
+            gap: 30px;
+        }
+        
+        /* --- NEW: Column Headers --- */
+        .column-header {
+            font-size: 1.8em;
+            font-weight: 600;
+            color: #34495e;
+            border-bottom: 2px solid #bdc3c7;
+            padding-bottom: 10px;
+            margin-bottom: 20px;
+        }
+
+        /* --- NEW: SVG Icon Styles --- */
+        .card-icon {
+            width: 20px;
+            height: 20px;
+            margin-right: 12px;
+            vertical-align: -4px; /* Align icon with text */
         }
 
         /* Brush-off "Card" - now a <details> element */
@@ -65,6 +91,8 @@
             cursor: pointer;
             list-style: none; /* Removes default triangle marker */
             transition: background-color 0.2s ease;
+            display: flex; /* Use flexbox for icon alignment */
+            align-items: center;
         }
         
         .card-header::-webkit-details-marker {
@@ -78,9 +106,10 @@
         .card-header h2 {
             margin: 0;
             color: #2980b9;
-            font-size: 1.25em;
+            font-size: 1.15em; /* Slightly smaller for columns */
             display: inline-block;
             font-style: italic;
+            flex-grow: 1; /* Allow h2 to take remaining space */
         }
 
         /* Style for when the collapsible section is OPEN */
@@ -92,17 +121,16 @@
             background-color: #f5f7fa;
         }
         
-        /* Custom Triangle Marker */
-        .card-header::before {
+        /* Custom Triangle Marker (replaces text arrow) */
+        .card-header::after {
             content: '►'; /* Closed state */
             color: #3498db;
-            margin-right: 12px;
             font-size: 0.8em;
-            display: inline-block;
             transition: transform 0.2s ease-in-out;
+            margin-left: 10px;
         }
         
-        .card[open] .card-header::before {
+        .card[open] .card-header::after {
             transform: rotate(90deg); /* Open state */
         }
 
@@ -155,19 +183,31 @@
             padding-left: 10px;
         }
         
-        /* Citation Style */
-        .card-body .cite {
-            font-size: 0.85em;
-            color: #95a5a6;
-            font-style: italic;
+        /* --- NEW: Style for Cite Links --- */
+        .cite-link {
+            font-size: 0.8em;
+            color: #3498db;
             font-family: "Courier New", Courier, monospace;
+            text-decoration: none;
+            font-weight: bold;
+            margin-left: 4px;
+            border: 1px solid #e0e0e0;
+            border-radius: 4px;
+            padding: 2px 5px;
+            background: #f9f9f9;
+            display: inline-block; /* Prevents awkward line breaks */
+        }
+        .cite-link:hover {
+            background: #eef2ff;
+            border-color: #3498db;
+            color: #2980b9;
         }
         
         /* --- STYLES FOR "MINDSET" CARD --- */
         .card-mindset .card-header { background-color: #f4f6f7; }
         .card-mindset .card-header h2 { color: #34495e; font-style: normal; font-weight: 600; }
         .card-mindset[open] .card-header { background-color: #eef2f4; }
-        .card-mindset .card-header::before { color: #34495e; }
+        .card-mindset .card-header::after { color: #34495e; }
         .card-mindset .card-body li::before { color: #34495e; }
         .card-mindset .card-body strong { color: #c0392b; } /* Red for "DON'T" */
 
@@ -175,379 +215,473 @@
         .card-how .card-header { background-color: #f4eef7; }
         .card-how .card-header h2 { color: #8e44ad; font-style: normal; font-weight: 600; }
         .card-how[open] .card-header { background-color: #f0e6f5; }
-        .card-how .card-header::before { color: #8e44ad; }
+        .card-how .card-header::after { color: #8e44ad; }
         .card-how .card-body li::before { color: #8e44ad; }
         
         /* --- STYLES FOR "DIG DEEPER" CARD --- */
         .card-dig .card-header { background-color: #fef5e7; }
         .card-dig .card-header h2 { color: #e67e22; font-style: normal; font-weight: 600; }
         .card-dig[open] .card-header { background-color: #fdf0d5; }
-        .card-dig .card-header::before { color: #e67e22; }
+        .card-dig .card-header::after { color: #e67e22; }
         .card-dig .card-body li::before { color: #e67e22; }
         
         /* --- STYLES FOR "BUDGET" CARD --- */
         .card-budget .card-header { background-color: #f8f9f9; }
         .card-budget .card-header h2 { color: #2980b9; font-style: italic; }
+        .card-budget .card-header::after { color: #2980b9; }
         
         /* --- STYLES FOR THE "GO" CARD --- */
         .card-go .card-header { background-color: #e8f8f5; }
         .card-go .card-header h2 { color: #16a085; font-style: normal; font-weight: 600; }
         .card-go[open] .card-header { background-color: #e0f5f0; }
-        .card-go .card-header::before { color: #16a085; }
+        .card-go .card-header::after { color: #16a085; }
         .card-go .card-body li::before { color: #16a085; }
         .card-go .card-body strong { color: #2c3e50; }
         .card-go .card-body .example-dialog { background: #f4f7f6; padding: 15px; border-radius: 8px; margin-top: 10px; }
         .card-go .card-body .you { font-weight: bold; color: #16a085; }
         .card-go .card-body .prospect { font-weight: bold; color: #2980b9; }
 
+        /* --- Responsive Design for smaller screens --- */
+        @media (max-width: 900px) {
+            .cheatsheet-grid {
+                grid-template-columns: 1fr; /* Stack columns on mobile */
+            }
+            header {
+                padding: 20px;
+            }
+            main {
+                padding: 20px;
+            }
+            .card-header h2 {
+                font-size: 1.2em; /* Ensure text fits */
+            }
+        }
+
     </style>
 </head>
 <body>
 
+    <!-- SVG Icons Definition -->
+    <svg width="0" height="0" style="display:none;">
+        <symbol id="icon-dollar" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <line x1="12" y1="1" x2="12" y2="23"></line>
+            <path d="M17 5H9.5a3.5 3.5 0 0 0 0 7h5a3.5 3.5 0 0 1 0 7H6"></path>
+        </symbol>
+        <symbol id="icon-pause" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <rect x="6" y="4" width="4" height="16"></rect>
+            <rect x="14" y="4" width="4" height="16"></rect>
+        </symbol>
+        <symbol id="icon-block" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <circle cx="12" cy="12" r="10"></circle>
+            <line x1="4.93" y1="4.93" x2="19.07" y2="19.07"></line>
+        </symbol>
+        <symbol id="icon-users" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"></path>
+            <circle cx="9" cy="7" r="4"></circle>
+            <path d="M23 21v-2a4 4 0 0 0-3-3.87"></path>
+            <path d="M16 3.13a4 4 0 0 1 0 7.75"></path>
+        </symbol>
+        <symbol id="icon-reference" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <path d="M2 3h6a4 4 0 0 1 4 4v14a3 3 0 0 0-3-3H2z"></path>
+            <path d="M22 3h-6a4 4 0 0 0-4 4v14a3 3 0 0 1 3-3h7z"></path>
+        </symbol>
+        <symbol id="icon-mind" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <path d="M12 2a10 10 0 0 0-3.96 19.14A10 10 0 0 0 12 22a10 10 0 0 0 3.96-2.86A10 10 0 0 0 12 2z"></path>
+            <path d="M12 12a4 4 0 0 0-4 4"></path>
+            <path d="M16 12a4 4 0 0 1-4 4"></path>
+        </symbol>
+        <symbol id="icon-search" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <circle cx="11" cy="11" r="8"></circle>
+            <line x1="21" y1="21" x2="16.65" y2="16.65"></line>
+        </symbol>
+        <symbol id="icon-decision" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <path d="M12 22c5.523 0 10-4.477 10-10S17.523 2 12 2 2 6.477 2 12s4.477 10 10 10z"></path>
+            <path d="M12 16.5A4.5 4.5 0 1 0 12 7.5a4.5 4.5 0 1 0 0 9z"></path>
+            <path d="M12 2v2.5"></path><path d="M12 22v-2.5"></path>
+            <path d="M2 12h2.5"></path><path d="M22 12h-2.5"></path>
+            <path d="M4.93 4.93l1.768 1.768"></path><path d="M19.07 19.07l-1.768-1.768"></path>
+            <path d="M4.93 19.07l1.768-1.768"></path><path d="M19.07 4.93l-1.768 1.768"></path>
+        </symbol>
+        <symbol id="icon-present" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <rect x="2" y="3" width="20" height="14" rx="2" ry="2"></rect>
+            <line x1="8" y1="21" x2="16" y2="21"></line>
+            <line x1="12" y1="17" x2="12" y2="21"></line>
+        </symbol>
+        <symbol id="icon-go" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <circle cx="12" cy="12" r="10"></circle>
+            <polyline points="12 16 16 12 12 8"></polyline>
+            <line x1="8" y1="12" x2="16" y2="12"></line>
+        </symbol>
+    </svg>
+
     <div class="container">
         <header>
             <h1>NEPQ "Brush-off" Cheatsheet</h1>
-            <p>Never "handle" an objection. Ask questions to get behind the concern and help the prospect overcome it themselves. <span class="cite">[cite: 879-880]</span></p>
+            <p>Never "handle" an objection. Ask questions to get behind the concern and help the prospect overcome it themselves.<a href="blackbook.pdf#page=56" target="_blank" class="cite-link">[p. 56]</a></p>
         </header>
 
         <main>
-            <!-- CARD 1: PRICING -->
-            <details class="card card-budget">
-                <summary class="card-header">
-                    <h2>"I'm just looking for pricing." or "Can you just send me a quote?"</h2>
-                </summary>
-                <div class="card-body">
-                    <span class="principle">
-                        Core NEPQ Principle: Never give a proposal or quote without first diagnosing the problem. A "Trusted Authority" must diagnose before they prescribe.
-                    </span>
-                    <ul>
-                        <li>
-                            "That's not a problem. Just so I can put together the *best* information for you, <strong>what exactly are you looking for?</strong>"
-                        </li>
-                        <li>
-                            "I'd be open to putting together a proposal for you, but <strong>I'm not quite sure I could even help you yet</strong>...
-                            <span class="note">
-                                ...<strong>could I ask a few questions about your situation...</strong> to be able to put something together for you that might be useful?
-                                <br>
-                                *(Then ask your first Situation Question):* 'For example, <strong>what are you using now...</strong> [for your fleet]?'"
-                            </span>
-                        </li>
-                        <li>
-                            "I can get you that. <strong>What is it that you are hoping to see from the quote?</strong>"
-                        </li>
-                        <li>
-                            "I will get to work on putting together a quote for you... Now, <strong>let's assume... we get you the quote</strong> and we were able to meet your needs... <strong>What do you see as the next step?</strong>" <span class="cite">[cite: 749-751]</span>
-                        </li>
-                    </ul>
-                </div>
-            </details>
+            <div class="cheatsheet-grid">
+                
+                <!-- --- COLUMN 1: THE BRUSH-OFFS --- -->
+                <section class="column">
+                    <h2 class="column-header">Part 1: The Brush-off Pivots</h2>
 
-            <!-- CARD 2: BUSY -->
-            <details class="card card-budget">
-                <summary class="card-header">
-                    <h2>"I'm too busy right now." or "Can you call me back later?"</h2>
-                </summary>
-                <div class="card-body">
-                    <span class="principle">
-                        Core NEPQ Principle: A "Trusted Authority's" time is also valuable. Do not be "needy". Establish professional posture and set a *firm* next step. <span class="cite">[cite: 771-773]</span>
-                    </span>
-                    <ul>
-                        <li>
-                            "That's not a problem. I can give you my number and <strong>you'll have to call me back if you'd like?</strong>"
-                        </li>
-                        <li>
-                            "My number is [Your Number]. <strong>What's your timeframe on getting back to me just to see if I would be available for you?</strong>"
-                        </li>
-                        <li>
-                            "If you have your calendar handy, I could pull out mine to <strong>book a specific time with you</strong> just so you don't have to chase me down and vice versa... <strong>would that be appropriate?</strong>"
-                        </li>
-                    </ul>
-                </div>
-            </details>
+                    <!-- CARD 1: PRICING -->
+                    <details class="card card-budget">
+                        <summary class="card-header">
+                            <svg class="card-icon" style="stroke: #2980b9;"><use href="#icon-dollar"></use></svg>
+                            <h2>"I'm just looking for pricing."</h2>
+                        </summary>
+                        <div class="card-body">
+                            <span class="principle">
+                                Core NEPQ Principle: Never give a proposal or quote without first diagnosing the problem. A "Trusted Authority" must diagnose before they prescribe.
+                            </span>
+                            <ul>
+                                <li>
+                                    "That's not a problem. Just so I can put together the *best* information for you, <strong>what exactly are you looking for?</strong>"
+                                </li>
+                                <li>
+                                    "I'd be open to putting together a proposal for you, but <strong>I'm not quite sure I could even help you yet</strong>...
+                                    <span class="note">
+                                        ...<strong>could I ask a few questions about your situation...</strong> to be able to put something together for you that might be useful?
+                                        <br>
+                                        *(Then ask your first Situation Question):* 'For example, <strong>what are you using now...</strong> [for your fleet]?'"
+                                    </span>
+                                </li>
+                                <li>
+                                    "I can get you that. <strong>What is it that you are hoping to see from the quote?</strong>"
+                                </li>
+                                <li>
+                                    "I will get to work on putting together a quote for you... Now, <strong>let's assume... we get you the quote</strong> and we were able to meet your needs... <strong>What do you see as the next step?</strong>"<a href="blackbook.pdf#page=45" target="_blank" class="cite-link">[p. 45]</a>
+                                </li>
+                            </ul>
+                        </div>
+                    </details>
 
-            <!-- CARD 3: NO PRIORITY -->
-            <details class="card card-budget">
-                <summary class="card-header">
-                    <h2>"This isn't a priority for me right now." or "I'm not interested."</h2>
-                </summary>
-                <div class="card-body">
-                    <span class="principle">
-                        Core NEPQ Principle: This simply means they do not feel enough *pain* or urgency. Your job is to find out if there is *any* problem to solve. <span class="cite">[cite: 671-672]</span>
-                    </span>
-                    <ul>
-                        <li>
-                            "I understand. I was just curious, <strong>what prompted you to look into changing this...</strong> [by requesting info] <strong>in the first place?</strong>"
-                        </li>
-                        <li>
-                            "That's fair. It sounds like things are going fairly well for you... <strong>is there anything you would change about...</strong> [how you manage your fleet] <strong>if you could?</strong>"
-                        </li>
-                        <li>
-                            "I see. <strong>How important is it for you to solve this problem...</strong> [of not knowing where your vehicles are]? <strong>Why is that</strong> [not a priority] <strong>now though?</strong>" <span class="cite">[cite: 184, 340-341]</span>
-                        </li>
-                        <li>
-                            "I understand. <strong>Have you given up trying to deal with this problem?</strong>"
-                        </li>
-                    </ul>
-                </div>
-            </details>
+                    <!-- CARD 2: BUSY -->
+                    <details class="card card-budget">
+                        <summary class="card-header">
+                            <svg class="card-icon" style="stroke: #2980b9;"><use href="#icon-pause"></use></svg>
+                            <h2>"I'm too busy right now."</h2>
+                        </summary>
+                        <div class="card-body">
+                            <span class="principle">
+                                Core NEPQ Principle: A "Trusted Authority's" time is also valuable. Do not be "needy". Establish professional posture and set a *firm* next step.<a href="blackbook.pdf#page=46" target="_blank" class="cite-link">[p. 46]</a>
+                            </span>
+                            <ul>
+                                <li>
+                                    "That's not a problem. I can give you my number and <strong>you'll have to call me back if you'd like?</strong>"
+                                </li>
+                                <li>
+                                    "My number is [Your Number]. <strong>What's your timeframe on getting back to me just to see if I would be available for you?</strong>"
+                                </li>
+                                <li>
+                                    "If you have your calendar handy, I could pull out mine to <strong>book a specific time with you</strong> just so you don't have to chase me down and vice versa... <strong>would that be appropriate?</strong>"
+                                </li>
+                            </ul>
+                        </div>
+                    </details>
 
-            <!-- CARD 4: COMPETITOR -->
-            <details class="card card-budget">
-                <summary class="card-header">
-                    <h2>"We're already using [Competitor]." or "We have a vendor for that."</h2>
-                </summary>
-                <div class="card-body">
-                    <span class="principle">
-                        Core NEPQ Principle: This is a "Vendor Disruption" opportunity. Do *not* pitch your features. Your only goal is to find the *gap*—the small dissatisfaction they have. <span class="cite">[cite: 437-438]</span>
-                    </span>
-                    <ul>
-                        <li>
-                            "That's great. To me, it sounds like things are going fairly well for you with [Competitor]... <strong>is there anything you would change about...</strong> [their service] <strong>if you could?</strong>"
-                            <span class="note">*(If they answer):* "<strong>Why change that though?</strong>"</span>
-                        </li>
-                        <li>
-                            "<strong>If you could change one thing about who you use now, what would that be?</strong>"
-                        </li>
-                        <li>
-                            "<strong>Can I ask in what ways could your vendor do better for you than what they are doing now though?</strong>"
-                        </li>
-                        <li>
-                            "<strong>Back when you chose to work with that company... what was your selection criteria...? In what ways has that (criteria) changed as you look at your needs today though?</strong>" <span class="cite">[cite: 288-289]</span>
-                        </li>
-                    </ul>
-                </div>
-            </details>
-            
-            <!-- NEW CARD: "SEND ME REFERENCES" -->
-            <details class="card card-budget">
-                <summary class="card-header">
-                    <h2>"Can you send me some references?"</h2>
-                </summary>
-                <div class="card-body">
-                    <span class="principle">
-                        Core NEPQ Principle: This is often a way to get rid of you. You must qualify their intent and secure a next step. <span class="cite">[cite: 711]</span>
-                    </span>
-                    <ul>
-                        <li>
-                            "That's not a problem, I'm curious <strong>what would you like to ask them when you call?</strong>"
-                            <span class="note">(This uncovers their real concern.)</span> <span class="cite">[cite: 716]</span>
-                        </li>
-                        <li>
-                            "So that I can send the right people to you, <strong>what specifically would you like to discuss with them?</strong>" <span class="cite">[cite: 719]</span>
-                        </li>
-                        <li>
-                            "I can reach out to them... Now, <strong>let's pretend for a moment that the clients you talk to say good things... where do you think we should go from there?</strong>"
-                            <span class="note">(This is the key qualifying/commitment question.)</span> <span class="cite">[cite: 726]</span>
-                        </li>
-                    </ul>
-                </div>
-            </details>
-            
-            <!-- NEW CARD: MINDSET -->
-            <details class="card card-mindset" open>
-                <summary class="card-header">
-                    <h2>Your NEPQ Mindset: Problem Finder, Not Product Pusher</h2>
-                </summary>
-                <div class="card-body">
-                    <span class="principle">
-                        Your goal is to help them find a problem they didn't know they had, or one they didn't know they could solve.
-                    </span>
-                    <ul>
-                        <li>
-                            You are a "Trusted Authority" and a "Problem Finder," like a doctor.
-                        </li>
-                        <li>
-                            You are <strong>NOT</strong> a "product pusher."
-                        </li>
-                        <li>
-                            You are here to ask questions and *diagnose*, not to pitch, present, or persuade.
-                        </li>
-                        <li>
-                            People buy on **emotion** (pain) and justify with logic. Your job is to find the *emotional* reason for change.
-                        </li>
-                        <li>
-                            <strong>DON'T</strong> talk about your products (GPS, dash cams). <strong>DO</strong> ask questions about their problems (fuel costs, driver behavior, lost time).
-                        </li>
-                        <li>
-                            Your <strong>TONE</strong> is more important than your words. Be <strong>neutral</strong>, <strong>calm</strong>, and <strong>curious</strong> (like a doctor), not "salesy" or "enthusiastic."
-                        </li>
-                        <li>
-                            Use a <strong>skeptical</strong> or <strong>confused</strong> tone when asking "why" questions to pull out more emotion.
-                        </li>
-                        <li>
-                            <strong>Without pain, there is no sale.</strong>
-                        </li>
-                    </ul>
-                </div>
-            </details>
-            
-            <!-- NEW CARD: DIG DEEPER -->
-            <details class="card card-dig">
-                <summary class="card-header">
-                    <h2>How to Dig Deeper (Probing & Clarifying Questions)</h2>
-                </summary>
-                <div class="card-body">
-                    <span class="principle">
-                        Use these when you get short, logical, or vague answers. These questions find the *emotion* and *pain*.
-                    </span>
-                    <ul>
-                        <li>
-                            "<strong>Tell me more...</strong>" <span class="cite">[cite: 379]</span>
-                        </li>
-                        <li>
-                            "<strong>How do you mean exactly?</strong>" <span class="cite">[cite: 317]</span>
-                        </li>
-                        <li>
-                            "<strong>Can you be more specific? Give me an example...</strong>" <span class="cite">[cite: 323]</span>
-                        </li>
-                        <li>
-                            "<strong>What's causing this issue?</strong>" <span class="cite">[cite: 318]</span>
-                        </li>
-                         <li>
-                            "<strong>Why so important now?</strong>" <span class="cite">[cite: 322]</span>
-                        </li>
-                        <li>
-                            "<strong>Has that had an impact on you? In what way?</strong>" <span class="cite">[cite: 147]</span>
-                        </li>
-                        <li>
-                            "<strong>How did you feel about that?</strong>" <span class="cite">[cite: 391]</span>
-                        </li>
-                        <li>
-                            "<strong>What would this do for you personally?</strong>" <span class="cite">[cite: 329]</span>
-                        </li>
-                    </ul>
-                </div>
-            </details>
-            
-            <!-- NEW CARD: "DECISION PROCESS" -->
-            <details class="card card-how">
-                <summary class="card-header">
-                    <h2>How to Uncover the Decision Process</h2>
-                </summary>
-                <div class="card-body">
-                    <span class="principle">
-                        Use these *before* the transition to understand *how* they buy, so you don't get stuck later.
-                    </span>
-                    <ul>
-                        <li>
-                            "<strong>Can you walk me through the criteria you use</strong> when picking a company to solve these issues...?" <span class="cite">[cite: 366]</span>
-                        </li>
-                        <li>
-                            "<strong>Let's suppose you are looking at several different companies</strong> who all meet your criteria, including price. <strong>How would you then decide what to do?</strong>" <span class="cite">[cite: 369]</span>
-                        </li>
-                        <li>
-                            "In addition to you, <strong>who else recognizes that this is a major problem</strong> in the company?" <span class="cite">[cite: 472]</span>
-                        </li>
-                        <li>
-                            "Who else besides you would be <strong>involved in approving the budget</strong> to solve this?" <span class="cite">[cite: 517]</span>
-                        </li>
-                    </ul>
-                </div>
-            </details>
-            
-            <!-- NEW CARD: NO BUDGET -->
-            <details class="card card-budget">
-                <summary class="card-header">
-                    <h2>"We don't have the budget for this." or "That's too expensive."</h2>
-                </summary>
-                <div class="card-body">
-                    <span class="principle">
-                        This means you haven't built enough value by finding their *pain*. The problem you've found isn't big enough (yet).
-                    </span>
-                    <ul>
-                        <li>
-                            "And I can appreciate that money might be an issue... from what you told me, <strong>how do you think you can resolve that</strong> so that you can..." <span class="note">[Repeat back the solution they said they wanted]</span> <span class="cite">[cite: 524-525]</span>
-                        </li>
-                        <li>
-                            "You had mentioned that the most important thing to you is cost, <strong>can I ask how that compares to you actually getting results</strong> and being able to solve this problem though?" <span class="cite">[cite: 371-372]</span>
-                        </li>
-                        <li>
-                            "Tell me, <strong>if you *did* have the funding... is this something that would work for you?</strong> ...Why do you feel it would though?" <span class="cite">[cite: 522-523]</span>
-                        </li>
-                        <li>
-                            "If you don't decide to address this problem now, <strong>how much will it cost you this year in lost...</strong> [profit/fuel/etc]?" <span class="cite">[cite: 489]</span>
-                        </li>
-                    </ul>
-                </div>
-            </details>
-            
-            <!-- NEW CARD: "HOW TO PRESENT" -->
-            <details class="card card-how">
-                <summary class="card-header">
-                    <h2>How to "Present" (by NOT Presenting)</h2>
-                </summary>
-                <div class="card-body">
-                    <span class="principle">
-                        After the "Transition Question," your "presentation" is just proving you can solve their stated problems. Ask these "Checking for Agreement" questions *constantly*. <span class="cite">[cite: 633, 649]</span>
-                    </span>
-                    <ul>
-                        <li>"<strong>Does that make sense?</strong>" <span class="cite">[cite: 641]</span></li>
-                        <li>"<strong>Are we on the same page?</strong>" <span class="cite">[cite: 642]</span></li>
-                        <li>"<strong>What are your thoughts on that?</strong>" <span class="cite">[cite: 643]</span></li>
-                        <li>"<strong>Are you with me on this?</strong>" <span class-"cite">[cite: 644]</span></li>
-                        <li>"<strong>Do you see how that works?</strong>" <span class="cite">[cite: 645]</span></li>
-                        <li>"<strong>Do you see how that could help you?</strong>" <span class="cite">[cite: 646]</span></li>
-                        <li>"<strong>How do you see that helping you the most?</strong>" <span class="cite">[cite: 651]</span></li>
-                    </ul>
-                </div>
-            </details>
-            
-            <!-- THE ONE-CALL CLOSE FRAMEWORK -->
-            <details class="card card-go" open> <!-- 'open' makes it default to open -->
-                <summary class="card-header">
-                    <h2>What to do AFTER you pivot (The One-Call Close Framework)</h2>
-                </summary>
-                <div class="card-body">
-                    <span class="principle">
-                        This is the start of your One-Call Close. You have successfully pivoted and are now a "Problem Finder." Accelerate this entire NEPQ Dialogue Framework into one conversation.
-                    </span>
-                    <ul>
-                        <li>
-                            <strong>Situation Questions</strong>
-                            <span class="note example-dialog">
-                                <span class="you">You:</span> "...<strong>What are you using now for your fleet?</strong>"
-                                <br>
-                                <span class="prospect">Prospect:</span> "I just use my phone and paper logs."
+                    <!-- CARD 3: NO PRIORITY -->
+                    <details class="card card-budget">
+                        <summary class="card-header">
+                            <svg class="card-icon" style="stroke: #2980b9;"><use href="#icon-block"></use></svg>
+                            <h2>"This isn't a priority right now."</h2>
+                        </summary>
+                        <div class="card-body">
+                            <span class="principle">
+                                Core NEPQ Principle: This simply means they do not feel enough *pain* or urgency. Your job is to find out if there is *any* problem to solve.<a href="blackbook.pdf#page=41" target="_blank" class="cite-link">[p. 41]</a>
                             </span>
-                        </li>
-                        <li>
-                            <strong>Problem Awareness Questions</strong>
-                            <span class="note example-dialog">
-                                <span class="you">You:</span> "And <strong>what do you like or... what *don't* you like</strong> about that?"
+                            <ul>
+                                <li>
+                                    "I understand. I was just curious, <strong>what prompted you to look into changing this...</strong> [by requesting info] <strong>in the first place?</strong>"<a href="blackbook.pdf#page=22" target="_blank" class="cite-link">[p. 22]</a>
+                                </li>
+                                <li>
+                                    "That's fair. It sounds like things are going fairly well for you... <strong>is there anything you would change about...</strong> [how you manage your fleet] <strong>if you could?</strong>"<a href="blackbook.pdf#page=12" target="_blank" class="cite-link">[p. 12]</a>
+                                </li>
+                                <li>
+                                    "I see. <strong>How important is it for you to solve this problem...</strong> [of not knowing where your vehicles are]? <strong>Why is that</strong> [not a priority] <strong>now though?</strong>"<a href="blackbook.pdf#page=14" target="_blank" class="cite-link">[p. 14]</a>
+                                </li>
+                                <li>
+                                    "I understand. <strong>Have you given up trying to deal with this problem?</strong>"<a href="blackbook.pdf#page=28" target="_blank" class="cite-link">[p. 28]</a>
+                                </li>
+                            </ul>
+                        </div>
+                    </details>
+
+                    <!-- CARD 4: COMPETITOR -->
+                    <details class="card card-budget">
+                        <summary class="card-header">
+                            <svg class="card-icon" style="stroke: #2980b9;"><use href="#icon-users"></use></svg>
+                            <h2>"We're already using [Competitor]."</h2>
+                        </summary>
+                        <div class="card-body">
+                            <span class="principle">
+                                Core NEPQ Principle: This is a "Vendor Disruption" opportunity. Do *not* pitch your features. Your only goal is to find the *gap*—the small dissatisfaction they have.<a href="blackbook.pdf#page=19" target="_blank" class="cite-link">[p. 19]</a>
                             </span>
-                        </li>
-                        <li>
-                            <strong>Consequence Questions</strong>
-                            <span class="note example-dialog">
-                                <span class="you">You:</span> "<strong>What if you don't do anything about this problem</strong> and your fuel costs keep going up?" <span class="cite">[cite: 172-173]</span>
+                            <ul>
+                                <li>
+                                    "That's great. To me, it sounds like things are going fairly well for you with [Competitor]... <strong>is there anything you would change about...</strong> [their service] <strong>if you could?</strong>"
+                                    <span class="note">*(If they answer):* "<strong>Why change that though?</strong>"</span>
+                                </li>
+                                <li>
+                                    "<strong>If you could change one thing about who you use now, what would that be?</strong>"
+                                </li>
+                                <li>
+                                    "<strong>Can I ask in what ways could your vendor do better for you than what they are doing now though?</strong>"
+                                </li>
+                                <li>
+                                    "<strong>Back when you chose to work with that company... what was your selection criteria...? In what ways has that (criteria) changed as you look at your needs today though?</strong>"<a href="blackbook.pdf#page=20" target="_blank" class="cite-link">[p. 20]</a>
+                                </li>
+                            </ul>
+                        </div>
+                    </details>
+                    
+                    <!-- CARD 5: "SEND ME REFERENCES" -->
+                    <details class="card card-budget">
+                        <summary class="card-header">
+                            <svg class="card-icon" style="stroke: #2980b9;"><use href="#icon-reference"></use></svg>
+                            <h2>"Can you send me some references?"</h2>
+                        </summary>
+                        <div class="card-body">
+                            <span class="principle">
+                                Core NEPQ Principle: This is often a way to get rid of you. You must qualify their intent and secure a next step.<a href="blackbook.pdf#page=43" target="_blank" class="cite-link">[p. 43]</a>
                             </span>
-                        </li>
-                        <li>
-                            <strong>Qualifying Questions</strong>
-                            <span class="note example-dialog">
-                                <span class="you">You:</span> "<strong>How important is it for you to solve this problem? Why is that important to you *now* though?</strong>" <span class="cite">[cite: 184]</span>
+                            <ul>
+                                <li>
+                                    "That's not a problem, I'm curious <strong>what would you like to ask them when you call?</strong>"
+                                    <span class="note">(This uncovers their real concern.)</span><a href="blackbook.pdf#page=44" target="_blank" class="cite-link">[p. 44]</a>
+                                </li>
+                                <li>
+                                    "So that I can send the right people to you, <strong>what specifically would you like to discuss with them?</strong>"<a href="blackbook.pdf#page=44" target="_blank" class="cite-link">[p. 44]</a>
+                                </li>
+                                <li>
+                                    "I can reach out to them... Now, <strong>let's pretend for a moment that the clients you talk to say good things... where do you think we should go from there?</strong>"
+                                    <span class="note">(This is the key qualifying/commitment question.)</span><a href="blackbook.pdf#page=44" target="_blank" class="cite-link">[p. 44]</a>
+                                </li>
+                            </ul>
+                        </div>
+                    </details>
+                    
+                    <!-- CARD 6: NO BUDGET -->
+                    <details class="card card-budget">
+                        <summary class="card-header">
+                            <svg class="card-icon" style="stroke: #2980b9;"><use href="#icon-dollar"></use></svg>
+                            <h2>"We don't have the budget for this."</h2>
+                        </summary>
+                        <div class="card-body">
+                            <span class="principle">
+                                This means you haven't built enough value by finding their *pain*. The problem you've found isn't big enough (yet).<a href="blackbook.pdf#page=31" target="_blank" class="cite-link">[p. 31]</a>
                             </span>
-                        </li>
-                        <li>
-                            <strong>Transition Questions</strong>
-                            <span class="note example-dialog">
-                                <span class="you">You:</span> "Based on what you told me... [repeat their problems/feelings]... <strong>Does that feel as if it might be what you're looking for?</strong>" <span class="cite">[cite: 196-197]</span>
+                            <ul>
+                                <li>
+                                    "And I can appreciate that money might be an issue... from what you told me, <strong>how do you think you can resolve that</strong> so that you can..." <span class="note">[Repeat back the solution they said they wanted]</span><a href="blackbook.pdf#page=32" target="_blank" class="cite-link">[p. 32]</a>
+                                </li>
+                                <li>
+                                    "You had mentioned that the most important thing to you is cost, <strong>can I ask how that compares to you actually getting results</strong> and being able to solve this problem though?"<a href="blackbook.pdf#page=25" target="_blank" class="cite-link">[p. 25]</a>
+                                </li>
+                                <li>
+                                    "Tell me, <strong>if you *did* have the funding... is this something that would work for you?</strong> ...Why do you feel it would though?"<a href="blackbook.pdf#page=32" target="_blank" class="cite-link">[p. 32]</a>
+                                </li>
+                                <li>
+                                    "If you don't decide to address this problem now, <strong>how much will it cost you this year in lost...</strong> [profit/fuel/etc]?"<a href="blackbook.pdf#page=30" target="_blank" class="cite-link">[p. 30]</a>
+                                </li>
+                            </ul>
+                        </div>
+                    </details>
+
+                </section>
+                
+                <!-- --- COLUMN 2: THE FRAMEWORK --- -->
+                <section class="column">
+                    <h2 class="column-header">Part 2: The Framework</h2>
+
+                    <!-- CARD 7: MINDSET -->
+                    <details class="card card-mindset">
+                        <summary class="card-header">
+                            <svg class="card-icon" style="stroke: #34495e;"><use href="#icon-mind"></use></svg>
+                            <h2>Your NEPQ Mindset</h2>
+                        </summary>
+                        <div class="card-body">
+                            <span class="principle">
+                                Your goal is to help them find a problem they didn't know they had, or one they didn't know they could solve.
                             </span>
-                        </li>
-                        <li>
-                            <strong>Committing Questions</strong>
-                            <span class="note example-dialog">
-                                <span class="you">You:</span> "<strong>Do you feel like this could be the answer for you? Why though?</strong> ...Really, the next step is we make some type of arrangement..." <span class="cite">[cite: 206-208]</span>
+                            <ul>
+                                <li>
+                                    You are a "Trusted Authority" and a "Problem Finder," like a doctor.
+                                </li>
+                                <li>
+                                    You are <strong>NOT</strong> a "product pusher."
+                                </li>
+                                <li>
+                                    You are here to ask questions and *diagnose*, not to pitch, present, or persuade.
+                                </li>
+                                <li>
+                                    People buy on **emotion** (pain) and justify with logic. Your job is to find the *emotional* reason for change.
+                                </li>
+                                <li>
+                                    <strong>DON'T</strong> talk about your products (GPS, dash cams). <strong>DO</strong> ask questions about their problems (fuel costs, driver behavior, lost time).
+                                </li>
+                                <li>
+                                    Your <strong>TONE</strong> is more important than your words. Be <strong>neutral</strong>, <strong>calm</strong>, and <strong>curious</strong> (like a doctor), not "salesy" or "enthusiastic."
+                                </li>
+                                <li>
+                                    Use a <strong>skeptical</strong> or <strong>confused</strong> tone when asking "why" questions to pull out more emotion.
+                                </li>
+                                <li>
+                                    <strong>Without pain, there is no sale.</strong>
+                                </li>
+                            </ul>
+                        </div>
+                    </details>
+                    
+                    <!-- CARD 8: DIG DEEPER -->
+                    <details class="card card-dig">
+                        <summary class="card-header">
+                            <svg class="card-icon" style="stroke: #e67e22;"><use href="#icon-search"></use></svg>
+                            <h2>How to Dig Deeper (Probing)</h2>
+                        </summary>
+                        <div class="card-body">
+                            <span class="principle">
+                                Use these when you get short, logical, or vague answers. These questions find the *emotion* and *pain*.<a href="blackbook.pdf#page=22" target="_blank" class="cite-link">[p. 22]</a>
                             </span>
-                        </li>
-                    </ul>
-                </div>
-            </details>
-            
+                            <ul>
+                                <li>
+                                    "<strong>Tell me more...</strong>"<a href="blackbook.pdf#page=25" target="_blank" class="cite-link">[p. 25]</a>
+                                </li>
+                                <li>
+                                    "<strong>How do you mean exactly?</strong>"
+                                </li>
+                                <li>
+                                    "<strong>Can you be more specific? Give me an example...</strong>"
+                                </li>
+                                <li>
+                                    "<strong>What's causing this issue?</strong>"
+                                </li>
+                                <li>
+                                    "<strong>Why so important now?</strong>"
+                                </li>
+                                <li>
+                                    "<strong>Has that had an impact on you? In what way?</strong>"<a href="blackbook.pdf#page=12" target="_blank" class="cite-link">[p. 12]</a>
+                                </li>
+                                <li>
+                                    "<strong>How did you feel about that?</strong>"<a href="blackbook.pdf#page=26" target="_blank" class="cite-link">[p. 26]</a>
+                                </li>
+                                <li>
+                                    "<strong>What would this do for you personally?</strong>"
+                                </li>
+                            </ul>
+                        </div>
+                    </details>
+                    
+                    <!-- CARD 9: "DECISION PROCESS" -->
+                    <details class="card card-how">
+                        <summary class="card-header">
+                            <svg class="card-icon" style="stroke: #8e44ad;"><use href="#icon-decision"></use></svg>
+                            <h2>How to Uncover the Decision Process</h2>
+                        </summary>
+                        <div class="card-body">
+                            <span class="principle">
+                                Use these *before* the transition to understand *how* they buy, so you don't get stuck later.<a href="blackbook.pdf#page=24" target="_blank" class="cite-link">[p. 24]</a>
+                            </span>
+                            <ul>
+                                <li>
+                                    "<strong>Can you walk me through the criteria you use</strong> when picking a company to solve these issues...?"
+                                </li>
+                                <li>
+                                    "<strong>Let's suppose you are looking at several different companies</strong> who all meet your criteria, including price. <strong>How would you then decide what to do?</strong>"<a href="blackbook.pdf#page=25" target="_blank" class="cite-link">[p. 25]</a>
+                                </li>
+                                <li>
+                                    "In addition to you, <strong>who else recognizes that this is a major problem</strong> in the company?"<a href="blackbook.pdf#page=30" target="_blank" class="cite-link">[p. 30]</a>
+                                </li>
+                                <li>
+                                    "Who else besides you would be <strong>involved in approving the budget</strong> to solve this?"<a href="blackbook.pdf#page=31" target="_blank" class="cite-link">[p. 31]</a>
+                                </li>
+                            </ul>
+                        </div>
+                    </details>
+                    
+                    <!-- CARD 10: "HOW TO PRESENT" -->
+                    <details class="card card-how">
+                        <summary class="card-header">
+                            <svg class="card-icon" style="stroke: #8e44ad;"><use href="#icon-present"></use></svg>
+                            <h2>How to "Present" (by NOT Presenting)</h2>
+                        </summary>
+                        <div class="card-body">
+                            <span class="principle">
+                                After the "Transition Question," your "presentation" is just proving you can solve their stated problems. Ask these "Checking for Agreement" questions *constantly*.<a href="blackbook.pdf#page=39" target="_blank" class="cite-link">[p. 39]</a>
+                            </span>
+                            <ul>
+                                <li>"<strong>Does that make sense?</strong>"</li>
+                                <li>"<strong>Are we on the same page?</strong>"</li>
+                                <li>"<strong>What are your thoughts on that?</strong>"</li>
+                                <li>"<strong>Are you with me on this?</strong>"</li>
+                                <li>"<strong>Do you see how that works?</strong>"</li>
+                                <li>"<strong>Do you see how that could help you?</strong>"</li>
+                                <li>"<strong>How do you see that helping you the most?</strong>"<a href="blackbook.pdf#page=40" target="_blank" class="cite-link">[p. 40]</a></li>
+                            </ul>
+                        </div>
+                    </details>
+                    
+                    <!-- CARD 11: THE ONE-CALL CLOSE FRAMEWORK -->
+                    <details class="card card-go">
+                        <summary class="card-header">
+                            <svg class="card-icon" style="stroke: #16a085;"><use href="#icon-go"></use></svg>
+                            <h2>The One-Call Close Framework</h2>
+                        </summary>
+                        <div class="card-body">
+                            <span class="principle">
+                                After you pivot, accelerate this entire NEPQ Dialogue Framework into one conversation.<a href="blackbook.pdf#page=10" target="_blank" class="cite-link">[p. 10]</a>
+                            </span>
+                            <ul>
+                                <li>
+                                    <strong>Situation Questions</strong><a href="blackbook.pdf#page=11" target="_blank" class="cite-link">[p. 11]</a>
+                                    <span class="note example-dialog">
+                                        <span class="you">You:</span> "...<strong>What are you using now for your fleet?</strong>"
+                                        <br>
+                                        <span class="prospect">Prospect:</span> "I just use my phone and paper logs."
+                                    </span>
+                                </li>
+                                <li>
+                                    <strong>Problem Awareness Questions</strong><a href="blackbook.pdf#page=12" target="_blank" class="cite-link">[p. 12]</a>
+                                    <span class="note example-dialog">
+                                        <span class="you">You:</span> "And <strong>what do you like or... what *don't* you like</strong> about that?"
+                                    </span>
+                                </li>
+                                <li>
+                                    <strong>Consequence Questions</strong><a href="blackbook.pdf#page=14" target="_blank" class="cite-link">[p. 14]</a>
+                                    <span class="note example-dialog">
+                                        <span class="you">You:</span> "<strong>What if you don't do anything about this problem</strong> and your fuel costs keep going up?"
+                                    </span>
+                                </li>
+                                <li>
+                                    <strong>Qualifying Questions</strong><a href="blackbook.pdf#page=14" target="_blank" class="cite-link">[p. 14]</a>
+                                    <span class="note example-dialog">
+                                        <span class="you">You:</span> "<strong>How important is it for you to solve this problem? Why is that important to you *now* though?</strong>"
+                                    </span>
+                                </li>
+                                <li>
+                                    <strong>Transition Questions</strong><a href="blackbook.pdf#page=15" target="_blank" class="cite-link">[p. 15]</a>
+                                    <span class="note example-dialog">
+                                        <span class="you">You:</span> "Based on what you told me... [repeat their problems/feelings]... <strong>Does that feel as if it might be what you're looking for?</strong>"
+                                    </span>
+                                </li>
+                                <li>
+                                    <strong>Committing Questions</strong><a href="blackbook.pdf#page=15" target="_blank" class="cite-link">[p. 15]</a>
+                                    <span class="note example-dialog">
+                                        <span class="you">You:</span> "<strong>Do you feel like this could be the answer for you? Why though?</strong> ...Really, the next step is we make some type of arrangement..."
+                                    </span>
+                                </li>
+                            </ul>
+                        </div>
+                    </details>
+                </section>
+                
+            </div><!-- / .cheatsheet-grid -->
         </main>
     </div>
 
 </body>
 </html>
-
 
