@@ -5,11 +5,37 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>NEPQ "Brush-off" Cheatsheet</title>
     <style>
+        /* --- Root Variables for Colors (from your preferred code) --- */
+        :root {
+            --bg-main: #f8f9fa;
+            --bg-container: #ffffff;
+            --header-bg: #2c3e50;
+            --header-border: #4a90e2;
+            --text-dark: #343a40;
+            --text-medium: #6c757d;
+            --border-color: #dee2e6;
+            --pivot-header-bg: #f1f3f5;
+            --pivot-header-text: #495057;
+            --pivot-icon-stroke: #495057;
+            --pivot-arrow: #4a90e2;
+            --pivot-bullet: #4a90e2;
+            --pivot-question: #1a7f7f;
+            --framework-header-bg: #e6f7ff;
+            --framework-header-text: #0b7285;
+            --framework-icon-stroke: #0b7285;
+            --framework-arrow: #0b7285;
+            --framework-bullet: #0b7285;
+            --tone-bg: #fff9db;
+            --tone-border: #fcc419;
+            --tone-text: #594b0d;
+            --link-color: #1c7ed6;
+        }
+
         /* Basic Page Styles */
         body {
             font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
             line-height: 1.6;
-            background-color: #f4f7f6;
+            background-color: #f4f7f6; /* Using your original color */
             color: #333;
             padding: 20px;
             margin: 0;
@@ -22,7 +48,7 @@
             background: #ffffff;
             border-radius: 12px;
             box-shadow: 0 4px 25px rgba(0, 0, 0, 0.07);
-            overflow: hidden;
+            /* overflow: hidden; */ /* <-- THIS WAS THE PROBLEM. IT IS NOW REMOVED. */
         }
 
         /* Header */
@@ -31,6 +57,8 @@
             background-color: #2c3e50;
             color: #ffffff;
             border-bottom: 4px solid #3498db;
+             border-top-left-radius: 12px; /* Added for consistency */
+             border-top-right-radius: 12px; /* Added for consistency */
         }
         header h1 {
             margin: 0;
@@ -53,8 +81,25 @@
             display: grid;
             grid-template-columns: 1fr 1fr; /* Two equal columns */
             gap: 30px;
+            align-items: start; /* CRITICAL for sticky */
         }
         
+        /* --- NEW: STICKY COLUMN CSS --- */
+        .column-sticky {
+            position: sticky;
+            top: 20px; /* Space from the top of the viewport */
+            align-self: start;
+            max-height: calc(100vh - 40px); /* Height of viewport minus body padding */
+            overflow-y: auto; /* Add scrollbar ONLY to this column if it's too tall */
+             padding-right: 15px; /* Space for the scrollbar */
+        }
+        /* Style the scrollbar for the sticky column */
+        .column-sticky::-webkit-scrollbar { width: 8px; }
+        .column-sticky::-webkit-scrollbar-track { background: #f1f3f5; border-radius: 4px; }
+        .column-sticky::-webkit-scrollbar-thumb { background: #ced4da; border-radius: 4px; }
+        .column-sticky::-webkit-scrollbar-thumb:hover { background: #adb5bd; }
+
+
         /* --- Column Headers --- */
         .column-header {
             font-size: 1.8em;
@@ -63,6 +108,19 @@
             border-bottom: 2px solid #bdc3c7;
             padding-bottom: 10px;
             margin-bottom: 20px;
+            /* Make header sticky *within* its column */
+            position: sticky;
+            top: -1px; /* Stick to top of its scrolling container */
+            background: var(--bg-container); /* Match container bg */
+            z-index: 10;
+        }
+         /* Adjust sticky header inside sticky column */
+         .column-sticky .column-header {
+             padding-left: 5px;
+             margin-left: -15px;
+             margin-right: -15px;
+             width: calc(100% + 30px);
+             padding-right: 15px;
         }
 
         /* --- SVG Icon Styles --- */
@@ -81,6 +139,7 @@
             margin-bottom: 20px;
             box-shadow: 0 2px 5px rgba(0, 0, 0, 0.05);
             transition: all 0.2s ease-in-out;
+             overflow: hidden; /* Add this to contain card radius */
         }
         
         /* The Clickable Title - the <summary> element */
@@ -204,105 +263,62 @@
         }
         
         /* --- STYLES FOR "MINDSET" CARD --- */
-        .card-mindset .card-header { background-color: #f4f6f7; }
-        .card-mindset .card-header h2 { color: #34495e; font-style: normal; font-weight: 600; }
-        .card-mindset[open] .card-header { background-color: #eef2f4; }
-        .card-mindset .card-header::after { color: #34495e; }
-        .card-mindset .card-body li::before { color: #34495e; }
+        .card-mindset .card-header { background-color: var(--framework-header-bg); } /* Use new framework color */
+        .card-mindset .card-header h2 { color: var(--framework-header-text); font-style: normal; font-weight: 600; }
+        .card-mindset[open] .card-header { background-color: #d0ebf2; } /* Use new framework color */
+        .card-mindset .card-header::after { color: var(--framework-arrow); }
+        .card-mindset .card-body li::before { color: var(--framework-bullet); content: '➔'; font-size: 1em; top: 2px; }
         .card-mindset .card-body strong { color: #c0392b; } /* Red for "DON'T" */
 
         /* --- STYLES FOR "HOW TO" CARD (PURPLE) --- */
-        .card-how .card-header { background-color: #f4eef7; }
-        .card-how .card-header h2 { color: #8e44ad; font-style: normal; font-weight: 600; }
-        .card-how[open] .card-header { background-color: #f0e6f5; }
-        .card-how .card-header::after { color: #8e44ad; }
-        .card-how .card-body li::before { color: #8e44ad; }
+        .card-how .card-header { background-color: var(--framework-header-bg); }
+        .card-how .card-header h2 { color: var(--framework-header-text); font-style: normal; font-weight: 600; }
+        .card-how[open] .card-header { background-color: #d0ebf2; }
+        .card-how .card-header::after { color: var(--framework-arrow); }
+        .card-how .card-body li::before { color: var(--framework-bullet); content: '➔'; font-size: 1em; top: 2px; }
         
         /* --- STYLES FOR "SCRIPT" CARD (PURPLE) --- */
         .card-script { /* Inherits from card-how */ }
-        .card-script .card-header { background-color: #f4eef7; }
-        .card-script .card-header h2 { color: #8e44ad; font-style: normal; font-weight: 600; }
-        .card-script[open] .card-header { background-color: #f0e6f5; }
-        .card-script .card-header::after { color: #8e44ad; }
-        .card-script .card-body li::before { color: #8e44ad; }
-        .card-script .card-body .stage-header { font-weight: bold; color: #8e44ad; margin-top: 20px; font-size: 1.1em; }
+        .card-script .card-header { background-color: var(--framework-header-bg); }
+        .card-script .card-header h2 { color: var(--framework-header-text); font-style: normal; font-weight: 600; }
+        .card-script[open] .card-header { background-color: #d0ebf2; }
+        .card-script .card-header::after { color: var(--framework-arrow); }
+        .card-script .card-body li::before { color: var(--framework-bullet); content: '➔'; font-size: 1em; top: 2px; }
+        .card-script .card-body .stage-header { font-weight: bold; color: var(--framework-header-text); margin-top: 20px; font-size: 1.1em; }
         .card-script .card-body .stage-time { font-size: 0.9em; color: #7f8c8d; font-style: italic; }
         .card-script .card-body .you { font-weight: bold; color: #16a085; }
         .card-script .card-body .prospect { font-weight: bold; color: #2980b9; }
         /* --- UPDATED: Style for Tone/Pacing notes --- */
-        .card-script .card-body .tone-note {
+        .tone-note { /* Standardize all tone notes */
             font-style: italic;
             font-size: 0.9em;
-            color: #555; /* Slightly darker text */
-            background-color: #fdf0d5; /* Light orange background */
+            color: var(--tone-text);
+            background-color: var(--tone-bg);
             padding: 8px 12px;
             border-radius: 4px;
             margin-top: 8px;
             margin-bottom: 15px;
             display: block;
-            border-left: 4px solid #e67e22; /* Orange left border */
-            font-weight: bold; /* Make text bold */
+            border-left: 4px solid var(--tone-border);
+            font-weight: bold;
         }
-        .card-dig .card-body .tone-note { /* Apply same style to dig deeper card */
-             font-style: italic;
-            font-size: 0.9em;
-            color: #555; /* Slightly darker text */
-            background-color: #fdf0d5; /* Light orange background */
-            padding: 8px 12px;
-            border-radius: 4px;
-            margin-top: 8px;
-            margin-bottom: 15px;
-            display: block;
-            border-left: 4px solid #e67e22; /* Orange left border */
-            font-weight: bold; /* Make text bold */
-        }
-        .card-how .card-body .tone-note { /* Apply same style to how-to cards */
-             font-style: italic;
-            font-size: 0.9em;
-            color: #555; /* Slightly darker text */
-            background-color: #fdf0d5; /* Light orange background */
-            padding: 8px 12px;
-            border-radius: 4px;
-            margin-top: 8px;
-            margin-bottom: 15px;
-            display: block;
-            border-left: 4px solid #e67e22; /* Orange left border */
-            font-weight: bold; /* Make text bold */
-        }
-         .card-example .card-body .tone-note { /* Apply same style to example card */
-             font-style: italic;
-            font-size: 0.9em;
-            color: #555; /* Slightly darker text */
-            background-color: #fdf0d5; /* Light orange background */
-            padding: 8px 12px;
-            border-radius: 4px;
-            margin-top: 8px;
-            margin-bottom: 15px;
-            display: block;
-            border-left: 4px solid #e67e22; /* Orange left border */
-            font-weight: bold; /* Make text bold */
-        }
-
 
         /* --- STYLES FOR "DIG DEEPER" CARD --- */
-        .card-dig .card-header { background-color: #fef5e7; }
-        .card-dig .card-header h2 { color: #e67e22; font-style: normal; font-weight: 600; }
-        .card-dig[open] .card-header { background-color: #fdf0d5; }
-        .card-dig .card-header::after { color: #e67e22; }
-        .card-dig .card-body li::before { color: #e67e22; }
+        .card-dig .card-header { background-color: var(--framework-header-bg); }
+        .card-dig .card-header h2 { color: var(--framework-header-text); font-style: normal; font-weight: 600; }
+        .card-dig[open] .card-header { background-color: #d0ebf2; }
+        .card-dig .card-header::after { color: var(--framework-arrow); }
+        .card-dig .card-body li::before { color: var(--framework-bullet); content: '➔'; font-size: 1em; top: 2px; }
         
-        /* --- STYLES FOR "BUDGET" CARD --- */
-        .card-budget .card-header { background-color: #f8f9f9; }
-        .card-budget .card-header h2 { color: #2980b9; font-style: italic; }
-        .card-budget .card-header::after { color: #2980b9; }
+        /* --- STYLES FOR "BUDGET" CARD (PIVOT) --- */
+        /* It correctly uses the default pivot styles, so no override needed */
         
         /* --- STYLES FOR "EXAMPLE" CARD (BLUE) --- */
-        .card-example .card-header { background-color: #f0f6ff; }
-        .card-example .card-header h2 { color: #2e86de; font-style: normal; font-weight: 600; }
-        .card-example[open] .card-header { background-color: #e4eefe; }
-        .card-example .card-header::after { color: #2e86de; }
-        .card-example .card-body li::before { color: #2e86de; }
-        .card-example .card-body strong { color: #16a085; }
+        .card-example .card-header { background-color: var(--framework-header-bg); }
+        .card-example .card-header h2 { color: var(--framework-header-text); font-style: normal; font-weight: 600; }
+        .card-example[open] .card-header { background-color: #d0ebf2; }
+        .card-example .card-header::after { color: var(--framework-arrow); }
+        .card-example .card-body li::before { color: var(--framework-bullet); content: '➔'; font-size: 1em; top: 2px; }
         .card-example .card-body .example-dialog { background: #f4f7f6; padding: 15px; border-radius: 8px; margin-top: 10px; }
         .card-example .card-body .you { font-weight: bold; color: #16a085; }
         .card-example .card-body .prospect { font-weight: bold; color: #2980b9; }
@@ -312,7 +328,7 @@
             display: block;
             font-weight: bold;
             color: #34495e;
-             margin-top: 15px; /* Added margin-top */
+             margin-top: 15px; 
             margin-bottom: 5px;
             font-size: 0.9em;
             text-transform: uppercase;
@@ -337,30 +353,34 @@
         }
         
         /* --- STYLES FOR THE "GO" CARD --- */
-        .card-go .card-header { background-color: #e8f8f5; }
-        .card-go .card-header h2 { color: #16a085; font-style: normal; font-weight: 600; }
-        .card-go[open] .card-header { background-color: #e0f5f0; }
-        .card-go .card-header::after { color: #16a085; }
-        .card-go .card-body li::before { color: #16a085; }
-        .card-go .card-body strong { color: #2c3e50; }
-        .card-go .card-body .example-dialog { background: #f4f7f6; padding: 15px; border-radius: 8px; margin-top: 10px; }
-        .card-go .card-body .you { font-weight: bold; color: #16a085; }
-        .card-go .card-body .prospect { font-weight: bold; color: #2980b9; }
+        /* This card is no longer used, replaced by Inbound Call Framework */
 
         /* --- Responsive Design for smaller screens --- */
-        @media (max-width: 900px) {
+        @media (max-width: 1100px) { /* Widen breakpoint for better stacking */
             .cheatsheet-grid {
                 grid-template-columns: 1fr; /* Stack columns on mobile */
             }
-            header {
-                padding: 20px;
+            .column-sticky { /* Disable sticky when stacked */
+                position: static;
+                max-height: none;
+                overflow-y: visible;
+                padding-right: 0; /* Reset padding */
             }
-            main {
-                padding: 20px;
+             .column-sticky .column-header { /* Reset sticky header */
+                 position: static;
+                 background: transparent;
+                 margin-left: 0;
+                 margin-right: 0;
+                 padding-left: 0;
+                 padding-right: 0;
+                 width: 100%;
             }
-            .card-header h2 {
-                font-size: 1.2em; /* Ensure text fits */
-            }
+        }
+         @media (max-width: 600px) { /* Further mobile tweaks */
+             header, main { padding: 20px; }
+             header h1 { font-size: 1.8em; }
+             .column-header { font-size: 1.5em; }
+             .card-header h2 { font-size: 1.1em; }
         }
 
     </style>
@@ -368,68 +388,19 @@
 <body>
 
     <!-- SVG Icons Definition -->
-    <svg width="0" height="0" style="display:none;">
-        <symbol id="icon-dollar" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-            <line x1="12" y1="1" x2="12" y2="23"></line>
-            <path d="M17 5H9.5a3.5 3.5 0 0 0 0 7h5a3.5 3.5 0 0 1 0 7H6"></path>
-        </symbol>
-        <symbol id="icon-pause" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-            <rect x="6" y="4" width="4" height="16"></rect>
-            <rect x="14" y="4" width="4" height="16"></rect>
-        </symbol>
-        <symbol id="icon-block" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-            <circle cx="12" cy="12" r="10"></circle>
-            <line x1="4.93" y1="4.93" x2="19.07" y2="19.07"></line>
-        </symbol>
-        <symbol id="icon-users" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-            <path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"></path>
-            <circle cx="9" cy="7" r="4"></circle>
-            <path d="M23 21v-2a4 4 0 0 0-3-3.87"></path>
-            <path d="M16 3.13a4 4 0 0 1 0 7.75"></path>
-        </symbol>
-        <symbol id="icon-reference" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-            <path d="M2 3h6a4 4 0 0 1 4 4v14a3 3 0 0 0-3-3H2z"></path>
-            <path d="M22 3h-6a4 4 0 0 0-4 4v14a3 3 0 0 1 3-3h7z"></path>
-        </symbol>
-        <symbol id="icon-mind" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-            <path d="M12 2a10 10 0 0 0-3.96 19.14A10 10 0 0 0 12 22a10 10 0 0 0 3.96-2.86A10 10 0 0 0 12 2z"></path>
-            <path d="M12 12a4 4 0 0 0-4 4"></path>
-            <path d="M16 12a4 4 0 0 1-4 4"></path>
-        </symbol>
-        <symbol id="icon-search" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-            <circle cx="11" cy="11" r="8"></circle>
-            <line x1="21" y1="21" x2="16.65" y2="16.65"></line>
-        </symbol>
-        <symbol id="icon-decision" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-            <path d="M12 22c5.523 0 10-4.477 10-10S17.523 2 12 2 2 6.477 2 12s4.477 10 10 10z"></path>
-            <path d="M12 16.5A4.5 4.5 0 1 0 12 7.5a4.5 4.5 0 1 0 0 9z"></path>
-            <path d="M12 2v2.5"></path><path d="M12 22v-2.5"></path>
-            <path d="M2 12h2.5"></path><path d="M22 12h-2.5"></path>
-            <path d="M4.93 4.93l1.768 1.768"></path><path d="M19.07 19.07l-1.768-1.768"></path>
-            <path d="M4.93 19.07l1.768-1.768"></path><path d="M19.07 4.93l-1.768 1.768"></path>
-        </symbol>
-        <symbol id="icon-present" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-            <rect x="2" y="3" width="20" height="14" rx="2" ry="2"></rect>
-            <line x1="8" y1="21" x2="16" y2="21"></line>
-            <line x1="12" y1="17" x2="12" y2="21"></line>
-        </symbol>
-        <symbol id="icon-go" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-            <circle cx="12" cy="12" r="10"></circle>
-            <polyline points="12 16 16 12 12 8"></polyline>
-            <line x1="8" y1="12" x2="16" y2="12"></line>
-        </symbol>
-        <symbol id="icon-clock" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-            <circle cx="12" cy="12" r="10"></circle>
-            <polyline points="12 6 12 12 16 14"></polyline>
-        </symbol>
-        <!-- NEW ICON ADDED -->
-        <symbol id="icon-script" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-            <path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"></path>
-            <polyline points="14 2 14 8 20 8"></polyline>
-            <line x1="16" y1="13" x2="8" y2="13"></line>
-            <line x1="16" y1="17" x2="8" y2="17"></line>
-            <polyline points="10 9 9 9 8 9"></polyline>
-        </symbol>
+     <svg width="0" height="0" style="display:none;">
+        <symbol id="icon-dollar" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"> <line x1="12" y1="1" x2="12" y2="23"></line> <path d="M17 5H9.5a3.5 3.5 0 0 0 0 7h5a3.5 3.5 0 0 1 0 7H6"></path> </symbol>
+        <symbol id="icon-pause" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"> <rect x="6" y="4" width="4" height="16"></rect> <rect x="14" y="4" width="4" height="16"></rect> </symbol>
+        <symbol id="icon-block" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"> <circle cx="12" cy="12" r="10"></circle> <line x1="4.93" y1="4.93" x2="19.07" y2="19.07"></line> </symbol>
+        <symbol id="icon-users" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"> <path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"></path> <circle cx="9" cy="7" r="4"></circle> <path d="M23 21v-2a4 4 0 0 0-3-3.87"></path> <path d="M16 3.13a4 4 0 0 1 0 7.75"></path> </symbol>
+        <symbol id="icon-reference" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"> <path d="M2 3h6a4 4 0 0 1 4 4v14a3 3 0 0 0-3-3H2z"></path> <path d="M22 3h-6a4 4 0 0 0-4 4v14a3 3 0 0 1 3-3h7z"></path> </symbol>
+        <symbol id="icon-mind" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"> <path d="M12 2a10 10 0 0 0-3.96 19.14A10 10 0 0 0 12 22a10 10 0 0 0 3.96-2.86A10 10 0 0 0 12 2z"></path> <path d="M12 12a4 4 0 0 0-4 4"></path> <path d="M16 12a4 4 0 0 1-4 4"></path> </symbol>
+        <symbol id="icon-search" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"> <circle cx="11" cy="11" r="8"></circle> <line x1="21" y1="21" x2="16.65" y2="16.65"></line> </symbol>
+        <symbol id="icon-decision" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"> <path d="M12 22c5.523 0 10-4.477 10-10S17.523 2 12 2 2 6.477 2 12s4.477 10 10 10z"></path> <path d="M12 16.5A4.5 4.5 0 1 0 12 7.5a4.5 4.5 0 1 0 0 9z"></path> <path d="M12 2v2.5"></path><path d="M12 22v-2.5"></path> <path d="M2 12h2.5"></path><path d="M22 12h-2.5"></path> <path d="M4.93 4.93l1.768 1.768"></path><path d="M19.07 19.07l-1.768-1.768"></path> <path d="M4.93 19.07l1.768-1.768"></path><path d="M19.07 4.93l-1.768 1.768"></path> </symbol>
+        <symbol id="icon-present" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"> <rect x="2" y="3" width="20" height="14" rx="2" ry="2"></rect> <line x1="8" y1="21" x2="16" y2="21"></line> <line x1="12" y1="17" x2="12" y2="21"></line> </symbol>
+        <symbol id="icon-go" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"> <circle cx="12" cy="12" r="10"></circle> <polyline points="12 16 16 12 12 8"></polyline> <line x1="8" y1="12" x2="16" y2="12"></line> </symbol>
+        <symbol id="icon-clock" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"> <circle cx="12" cy="12" r="10"></circle> <polyline points="12 6 12 12 16 14"></polyline> </symbol>
+        <symbol id="icon-script" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"> <path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"></path> <polyline points="14 2 14 8 20 8"></polyline> <line x1="16" y1="13" x2="8" y2="13"></line> <line x1="16" y1="17" x2="8" y2="17"></line> <polyline points="10 9 9 9 8 9"></polyline> </symbol>
     </svg>
 
     <div class="container">
@@ -441,14 +412,14 @@
         <main>
             <div class="cheatsheet-grid">
                 
-                <!-- --- COLUMN 1: THE BRUSH-OFFS --- -->
-                <section class="column">
+                <!-- --- COLUMN 1: THE BRUSH-OFFS (STICKY) --- -->
+                <section class="column column-sticky"> <!-- ADDED STICKY CLASS -->
                     <h2 class="column-header">Part 1: The Brush-off Pivots</h2>
 
                     <!-- CARD 1: PRICING -->
                     <details class="card card-budget">
                         <summary class="card-header">
-                            <svg class="card-icon" style="stroke: #2980b9;"><use href="#icon-dollar"></use></svg>
+                            <svg class="card-icon" style="stroke: var(--pivot-icon-stroke);"><use href="#icon-dollar"></use></svg>
                             <h2>"I'm just looking for pricing."</h2>
                         </summary>
                         <div class="card-body">
@@ -481,7 +452,7 @@
                     <!-- CARD 2: BUSY -->
                     <details class="card card-budget">
                         <summary class="card-header">
-                            <svg class="card-icon" style="stroke: #2980b9;"><use href="#icon-pause"></use></svg>
+                            <svg class="card-icon" style="stroke: var(--pivot-icon-stroke);"><use href="#icon-pause"></use></svg>
                             <h2>"I don't have time right now / Call me back."</h2>
                         </summary>
                         <div class="card-body">
@@ -509,7 +480,7 @@
                     <!-- CARD 3: NO PRIORITY -->
                     <details class="card card-budget">
                         <summary class="card-header">
-                            <svg class="card-icon" style="stroke: #2980b9;"><use href="#icon-block"></use></svg>
+                            <svg class="card-icon" style="stroke: var(--pivot-icon-stroke);"><use href="#icon-block"></use></svg>
                             <h2>"This isn't a priority right now."</h2>
                         </summary>
                         <div class="card-body">
@@ -536,7 +507,7 @@
                     <!-- CARD 4: COMPETITOR -->
                     <details class="card card-budget">
                         <summary class="card-header">
-                            <svg class="card-icon" style="stroke: #2980b9;"><use href="#icon-users"></use></svg>
+                            <svg class="card-icon" style="stroke: var(--pivot-icon-stroke);"><use href="#icon-users"></use></svg>
                             <h2>"We're already using [Competitor]."</h2>
                         </summary>
                         <div class="card-body">
@@ -564,7 +535,7 @@
                     <!-- CARD 5: "SEND ME REFERENCES" -->
                     <details class="card card-budget">
                         <summary class="card-header">
-                            <svg class="card-icon" style="stroke: #2980b9;"><use href="#icon-reference"></use></svg>
+                            <svg class="card-icon" style="stroke: var(--pivot-icon-stroke);"><use href="#icon-reference"></use></svg>
                             <h2>"Can you send me some references?"</h2>
                         </summary>
                         <div class="card-body">
@@ -590,7 +561,7 @@
                     <!-- CARD 6: NO BUDGET -->
                     <details class="card card-budget">
                         <summary class="card-header">
-                            <svg class="card-icon" style="stroke: #2980b9;"><use href="#icon-dollar"></use></svg>
+                            <svg class="card-icon" style="stroke: var(--pivot-icon-stroke);"><use href="#icon-dollar"></use></svg>
                             <h2>"We don't have the budget for this."</h2>
                         </summary>
                         <div class="card-body">
@@ -613,17 +584,16 @@
                             </ul>
                         </div>
                     </details>
-
                 </section>
                 
                 <!-- --- COLUMN 2: THE FRAMEWORK --- -->
-                <section class="column">
+                <section class="column column-framework"> <!-- REMOVED sticky class -->
                     <h2 class="column-header">Part 2: The Framework</h2>
 
                     <!-- CARD 7: MINDSET -->
                     <details class="card card-mindset">
                         <summary class="card-header">
-                            <svg class="card-icon" style="stroke: #34495e;"><use href="#icon-mind"></use></svg>
+                            <svg class="card-icon" style="stroke: var(--framework-icon-stroke);"><use href="#icon-mind"></use></svg>
                             <h2>Your NEPQ Mindset</h2>
                         </summary>
                         <div class="card-body">
@@ -641,7 +611,7 @@
                                     You are here to ask questions and *diagnose*, not to pitch, present, or persuade.
                                 </li>
                                 <li>
-                                    People buy on **emotion** (pain) and justify with logic. Your job is to find the *emotional* reason for change.
+                                    People buy on <strong>emotion</strong> (pain) and justify with logic. Your job is to find the *emotional* reason for change.
                                 </li>
                                 <li>
                                     <strong>DON'T</strong> talk about your products (GPS, dash cams). <strong>DO</strong> ask questions about their problems (fuel costs, driver behavior, lost time).
@@ -660,9 +630,9 @@
                     </details>
 
                     <!-- CARD (13): INBOUND CALL FRAMEWORK -->
-                    <details class="card card-script" open> <!-- Open by default -->
+                    <details class="card card-script"> 
                          <summary class="card-header">
-                            <svg class="card-icon" style="stroke: #8e44ad;"><use href="#icon-script"></use></svg>
+                            <svg class="card-icon" style="stroke: var(--framework-icon-stroke);"><use href="#icon-script"></use></svg>
                             <h2>Inbound Call Framework (One-Call Close)</h2>
                         </summary>
                        <div class="card-body">
@@ -683,7 +653,7 @@
                                     <span class="note">This references *their* action.</span>
                                 </li>
                                  <li>
-                                     <span class="note">➡️ If they say "No, I'm busy" or "Just send pricing" -> Use the **Brush-off Pivots** in Column 1.</span>
+                                     <span class="note">➡️ If they say "No, I'm busy" or "Just send pricing" -> Use the <strong>Brush-off Pivots</strong> in Column 1.</span>
                                  </li>
                                  <li>
                                       <span class="note">➡️ If they say "Yes" or anything neutral -> Proceed to Stage 1 below.</span>
@@ -695,11 +665,11 @@
                              <div class="tone-note">Tone: Curious, neutral (like a doctor gathering initial facts). Pacing: Normal, slightly slower than opening.</div>
                              <ul>
                                 <li>
-                                    <span class="you">You:</span> "Great. So, you were looking into [GPS Tracking / Dash Cams]... **What are you doing now...** for that?"<a href="blackbook.pdf#page=11" target="_blank" class="cite-link">[p. 11]</a>
+                                    <span class="you">You:</span> "Great. So, you were looking into [GPS Tracking / Dash Cams]... <strong>What are you doing now...</strong> for that?"<a href="blackbook.pdf#page=11" target="_blank" class="cite-link">[p. 11]</a>
                                     <span class="note">Goal: Establish their current state quickly.</span>
                                 </li>
                                  <li> <!-- ADDED VEHICLE COUNT QUESTION -->
-                                    <span class="you">You:</span> "Okay, and **roughly how many vehicles** are you running right now?"
+                                    <span class="you">You:</span> "Okay, and <strong>roughly how many vehicles</strong> are you running right now?"
                                     <span class="note">Keep tone neutral and factual here.</span>
                                  </li>
                              </ul>
@@ -708,17 +678,17 @@
                               <div class="tone-note">Tone: Shift to genuinely curious, maybe slightly confused or skeptical, especially on follow-up probes. Pacing: Slow down here. Use pauses after their answers. Let them feel the weight of their own words.</div>
                              <ul>
                                 <li>
-                                    <span class="you">You:</span> "Gotcha. And **what do you like or... what *don't* you like** about [calling drivers / using Airtags / current system]?"<a href="blackbook.pdf#page=12" target="_blank" class="cite-link">[p. 12]</a>
+                                    <span class="you">You:</span> "Gotcha. And <strong>what do you like or... what *don't* you like</strong> about [calling drivers / using Airtags / current system]?"<a href="blackbook.pdf#page=12" target="_blank" class="cite-link">[p. 12]</a>
                                     <span class="note">Focus on the "don't like." Use probing questions below to dig.</span>
                                 </li>
                                  <li>
-                                     <span class="you">You (Probing):</span> "When you say [it's a hassle / the reporting isn't great], **how do you mean exactly?**"<a href="blackbook.pdf#page=22" target="_blank" class="cite-link">[p. 22]</a> <span class="tone-note">Tone: Lean in slightly, sound genuinely curious/confused.</span>
+                                     <span class="you">You (Probing):</span> "When you say [it's a hassle / the reporting isn't great], <strong>how do you mean exactly?</strong>"<a href="blackbook.pdf#page=22" target="_blank" class="cite-link">[p. 22]</a> <span class="tone-note">Tone: Lean in slightly, sound genuinely curious/confused.</span>
                                  </li>
                                 <li>
-                                     <span class="you">You (Probing):</span> "**What's causing that issue?**"<a href="blackbook.pdf#page=22" target="_blank" class="cite-link">[p. 22]</a> <span class="tone-note">Tone: Curious detective.</span>
+                                     <span class="you">You (Probing):</span> "<strong>What's causing that issue?</strong>"<a href="blackbook.pdf#page=22" target="_blank" class="cite-link">[p. 22]</a> <span class="tone-note">Tone: Curious detective.</span>
                                 </li>
                                  <li>
-                                     <span class="you">You (Probing - The KEY Pain Question):</span> "**Has that had an impact on you? In what way?**"<a href="blackbook.pdf#page=12" target="_blank" class="cite-link">[p. 12]</a>
+                                     <span class="you">You (Probing - The KEY Pain Question):</span> "<strong>Has that had an impact on you? In what way?</strong>"<a href="blackbook.pdf#page=12" target="_blank" class="cite-link">[p. 12]</a>
                                     <span class="note">Listen for $$$, time wasted, frustration, customer complaints, risk.</span>
                                     <span class="tone-note">Tone: Empathetic but neutral. Pacing: Slow down, pause after asking.</span>
                                 </li>
@@ -728,11 +698,11 @@
                              <div class="tone-note">Tone: Collaborative, curious. Pacing: Normal.</div>
                             <ul>
                                 <li>
-                                    <span class="you">You:</span> "Okay, I see. So, **what have you done about changing this, if anything?**"<a href="blackbook.pdf#page=13" target="_blank" class="cite-link">[p. 13]</a>
+                                    <span class="you">You:</span> "Okay, I see. So, <strong>what have you done about changing this, if anything?</strong>"<a href="blackbook.pdf#page=13" target="_blank" class="cite-link">[p. 13]</a>
                                     <span class="note">Find out if they've tried other things and failed.</span>
                                 </li>
                                 <li>
-                                    <span class="you">You:</span> "And ideally, **what would you do about it if you could, though?**"<a href="blackbook.pdf#page=13" target="_blank" class="cite-link">[p. 13]</a>
+                                    <span class="you">You:</span> "And ideally, <strong>what would you do about it if you could, though?</strong>"<a href="blackbook.pdf#page=13" target="_blank" class="cite-link">[p. 13]</a>
                                     <span class="note">Let them describe their perfect solution.</span>
                                 </li>
                             </ul>
@@ -741,7 +711,7 @@
                               <div class="tone-note">Tone: Serious, slightly concerned (but NOT fear-mongering). Pacing: Slow, deliberate.</div>
                              <ul>
                                 <li>
-                                    <span class="you">You:</span> "That makes sense. **What if you don't do anything about this problem** and [repeat the pain - fuel costs stay high / you keep wasting time / customer complaints continue]?"<a href="blackbook.pdf#page=14" target="_blank" class="cite-link">[p. 14]</a>
+                                    <span class="you">You:</span> "That makes sense. <strong>What if you don't do anything about this problem</strong> and [repeat the pain - fuel costs stay high / you keep wasting time / customer complaints continue]?"<a href="blackbook.pdf#page=14" target="_blank" class="cite-link">[p. 14]</a>
                                     <span class="note">Build urgency by focusing on the negative future. Let them sit with the question.</span>
                                 </li>
                              </ul>
@@ -750,10 +720,10 @@
                               <div class="tone-note">Tone: Direct but neutral for the first question. Shift to skeptical/curious for "Why now?". Pacing: Normal, pause after "Why now?".</div>
                              <ul>
                                 <li>
-                                    <span class="you">You:</span> "So, **how important is it for you to solve this problem?**"<a href="blackbook.pdf#page=14" target="_blank" class="cite-link">[p. 14]</a>
+                                    <span class="you">You:</span> "So, <strong>how important is it for you to solve this problem?</strong>"<a href="blackbook.pdf#page=14" target="_blank" class="cite-link">[p. 14]</a>
                                 </li>
                                 <li>
-                                     <span class="you">You (Crucial follow-up):</span> "**Why is that important to you *now* though?**"<a href="blackbook.pdf#page=14" target="_blank" class="cite-link">[p. 14]</a>
+                                     <span class="you">You (Crucial follow-up):</span> "<strong>Why is that important to you *now* though?</strong>"<a href="blackbook.pdf#page=14" target="_blank" class="cite-link">[p. 14]</a>
                                      <span class="note">This confirms their urgency and emotional driver.</span>
                                 </li>
                              </ul>
@@ -762,10 +732,10 @@
                               <div class="tone-note">Tone: Neutral, information-gathering, like checking boxes. Pacing: Normal.</div>
                              <ul>
                                  <li>
-                                     <span class="you">You:</span> "Before I show you how we might be able to help... **Can you walk me through the criteria you use** when picking a company for something like this?"<a href="blackbook.pdf#page=24" target="_blank" class="cite-link">[p. 24]</a>
+                                     <span class="you">You:</span> "Before I show you how we might be able to help... <strong>Can you walk me through the criteria you use</strong> when picking a company for something like this?"<a href="blackbook.pdf#page=24" target="_blank" class="cite-link">[p. 24]</a>
                                  </li>
                                   <li>
-                                     <span class="you">You:</span> "And besides yourself, **who else might be involved** in making a final decision?"<a href="blackbook.pdf#page=31" target="_blank" class="cite-link">[p. 31]</a>
+                                     <span class="you">You:</span> "And besides yourself, <strong>who else might be involved</strong> in making a final decision?"<a href="blackbook.pdf#page=31" target="_blank" class="cite-link">[p. 31]</a>
                                      <span class="note">Don't skip this - avoids "I need to talk to my boss" later.</span>
                                  </li>
                              </ul>
@@ -774,11 +744,11 @@
                              <div class="tone-note">Tone: Helpful, bridging. Ask "Why do you feel it is though?" with genuine curiosity/slight skepticism - make them convince YOU. Pacing: Smooth, connecting pace.</div>
                             <ul>
                                 <li>
-                                    <span class="you">You:</span> "Okay, based on what you told me about [problem 1] and how it's making you feel [emotion/impact], and how you're looking for [their ideal solution]... what we do might actually work for you... [Briefly mention the core benefit related to their pain]... **Does that feel as if it might be what you're looking for?**"<a href="blackbook.pdf#page=15" target="_blank" class="cite-link">[p. 15]</a>
+                                    <span class="you">You:</span> "Okay, based on what you told me about [problem 1] and how it's making you feel [emotion/impact], and how you're looking for [their ideal solution]... what we do might actually work for you... [Briefly mention the core benefit related to their pain]... <strong>Does that feel as if it might be what you're looking for?</strong>"<a href="blackbook.pdf#page=15" target="_blank" class="cite-link">[p. 15]</a>
                                     <span class="note">Do NOT pitch features here. Just bridge their pain to the result.</span>
                                 </li>
                                 <li>
-                                    <span class="you">You (Crucial follow-up):</span> "**Why do you feel like it is though?**"<a href="blackbook.pdf#page=15" target="_blank" class="cite-link">[p. 15]</a>
+                                    <span class="you">You (Crucial follow-up):</span> "<strong>Why do you feel like it is though?</strong>"<a href="blackbook.pdf#page=15" target="_blank" class="cite-link">[p. 15]</a>
                                     <span class="note">Makes them sell themselves on why it's a fit.</span>
                                 </li>
                              </ul>
@@ -788,8 +758,8 @@
                              <ul>
                                  <li>
                                      <span class="note">Only NOW do you briefly show/explain *only* the parts of Verizon Connect that solve their *specific* stated problems. Use "Checking for Agreement" questions constantly.</span><a href="blackbook.pdf#page=39" target="_blank" class="cite-link">[p. 39]</a>
-                                     <span class="you">You:</span> "...so you can see the live map here... **Do you see how that could help you** avoid those customer calls?"<a href="blackbook.pdf#page=39" target="_blank" class="cite-link">[p. 39]</a>
-                                     <span class="you">You:</span> "...and this report shows idling time... **How do you see that helping you** the most with fuel costs?"<a href="blackbook.pdf#page=40" target="_blank" class="cite-link">[p. 40]</a>
+                                     <span class="you">You:</span> "...so you can see the live map here... <strong>Do you see how that could help you</strong> avoid those customer calls?"<a href="blackbook.pdf#page=39" target="_blank" class="cite-link">[p. 39]</a>
+                                     <span class="you">You:</span> "...and this report shows idling time... <strong>How do you see that helping you</strong> the most with fuel costs?"<a href="blackbook.pdf#page=40" target="_blank" class="cite-link">[p. 40]</a>
                                  </li>
                              </ul>
                              
@@ -797,17 +767,17 @@
                              <div class="tone-note">Tone: Calmly assumptive for "The Close" statement. Ask "Why though?" with curiosity. Final question ("Would that be appropriate?") is neutral, low-pressure, giving them control. Pacing: Calm, clear, slightly slower.</div>
                             <ul>
                                 <li>
-                                    <span class="you">You:</span> "So, **do you feel like this could be the answer for you?**"<a href="blackbook.pdf#page=15" target="_blank" class="cite-link">[p. 15]</a>
+                                    <span class="you">You:</span> "So, <strong>do you feel like this could be the answer for you?</strong>"<a href="blackbook.pdf#page=15" target="_blank" class="cite-link">[p. 15]</a>
                                 </li>
                                 <li>
-                                     <span class="you">You (Crucial follow-up):</span> "**Why though?**"<a href="blackbook.pdf#page=15" target="_blank" class="cite-link">[p. 15]</a>
+                                     <span class="you">You (Crucial follow-up):</span> "<strong>Why though?</strong>"<a href="blackbook.pdf#page=15" target="_blank" class="cite-link">[p. 15]</a>
                                      <span class="note">Again, makes them sell themselves.</span>
                                 </li>
                                 <li>
                                      <span class="you">You (The Close - UPDATED):</span> "Well, I don't have anything else to go over with you, it looks like we covered what you're looking for. Really, the next step is pretty simple. I just need to confirm the best shipping address for the equipment and your preferred billing method—we can do ACH or credit card. Once I have that, I'll send over a quick DocuSign agreement. After you sign that, you can just send over the VIN numbers for the vehicles, and we'll get everything scheduled for you." <span class="note">(Adjust details as needed)</span><a href="blackbook.pdf#page=15" target="_blank" class="cite-link">[p. 15 - adapted]</a>
                                 </li>
                                 <li>
-                                     <span class="you">You (Final Question):</span> "**Would that be appropriate, or how would you like to proceed from here?**"<a href="blackbook.pdf#page=16" target="_blank" class="cite-link">[p. 16]</a>
+                                     <span class="you">You (Final Question):</span> "<strong>Would that be appropriate, or how would you like to proceed from here?</strong>"<a href="blackbook.pdf#page=16" target="_blank" class="cite-link">[p. 16]</a>
                                 </li>
                              </ul>
                         </div>
@@ -816,7 +786,7 @@
                     <!-- CARD 8: DIG DEEPER -->
                     <details class="card card-dig">
                         <summary class="card-header">
-                            <svg class="card-icon" style="stroke: #e67e22;"><use href="#icon-search"></use></svg>
+                            <svg class="card-icon" style="stroke: var(--framework-icon-stroke);"><use href="#icon-search"></use></svg>
                             <h2>How to Dig Deeper (Probing)</h2>
                         </summary>
                         <div class="card-body">
@@ -856,7 +826,7 @@
                     <!-- CARD 9: "DECISION PROCESS" -->
                     <details class="card card-how">
                         <summary class="card-header">
-                            <svg class="card-icon" style="stroke: #8e44ad;"><use href="#icon-decision"></use></svg>
+                            <svg class="card-icon" style="stroke: var(--framework-icon-stroke);"><use href="#icon-decision"></use></svg>
                             <h2>How to Uncover the Decision Process</h2>
                         </summary>
                         <div class="card-body">
@@ -884,7 +854,7 @@
                     <!-- CARD 10: "HOW TO PRESENT" -->
                     <details class="card card-how">
                         <summary class="card-header">
-                            <svg class="card-icon" style="stroke: #8e44ad;"><use href="#icon-present"></use></svg>
+                            <svg class="card-icon" style="stroke: var(--framework-icon-stroke);"><use href="#icon-present"></use></svg>
                             <h2>How to "Present" (by NOT Presenting)</h2>
                         </summary>
                         <div class="card-body">
@@ -905,9 +875,9 @@
                     </details>
                     
                     <!-- CARD (11) - ACCELERATED EXAMPLE -->
-                    <details class="card card-example" open> <!-- This card is open by default -->
+                    <details class="card card-example"> 
                         <summary class="card-header">
-                            <svg class="card-icon" style="stroke: #2e86de;"><use href="#icon-clock"></use></svg>
+                            <svg class="card-icon" style="stroke: var(--framework-icon-stroke);"><use href="#icon-clock"></use></svg>
                             <h2>Accelerated NEPQ (Time Short / Price Focus)</h2>
                         </summary>
                         <div class="card-body">
