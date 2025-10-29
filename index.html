@@ -58,7 +58,7 @@
             color: #ffffff;
             border-bottom: 4px solid #3498db;
              border-top-left-radius: 12px; /* Added for consistency */
-             border-top-right-radius: 12px; /* Added for consistency */
+            border-top-right-radius: 12px; /* Added for consistency */
         }
         header h1 {
             margin: 0;
@@ -91,7 +91,7 @@
             align-self: start;
             max-height: calc(100vh - 40px); /* Height of viewport minus body padding */
             overflow-y: auto; /* Add scrollbar ONLY to this column if it's too tall */
-             padding-right: 15px; /* Space for the scrollbar */
+            padding-right: 15px; /* Space for the scrollbar */
         }
         /* Style the scrollbar for the sticky column */
         .column-sticky::-webkit-scrollbar { width: 8px; }
@@ -121,7 +121,7 @@
              margin-right: -15px;
              width: calc(100% + 30px);
              padding-right: 15px;
-        }
+         }
 
         /* --- SVG Icon Styles --- */
         .card-icon {
@@ -139,7 +139,7 @@
             margin-bottom: 20px;
             box-shadow: 0 2px 5px rgba(0, 0, 0, 0.05);
             transition: all 0.2s ease-in-out;
-             overflow: hidden; /* Add this to contain card radius */
+            overflow: hidden; /* Add this to contain card radius */
         }
         
         /* The Clickable Title - the <summary> element */
@@ -240,6 +240,23 @@
             display: block;
             margin-top: 5px;
             padding-left: 10px;
+        }
+
+        /* NEW STYLE for important logic notes */
+        .note-warning {
+            font-style: normal;
+            font-size: 0.95em;
+            color: #c0392b; /* Reddish text */
+            background-color: #fbeeee;
+            padding: 10px;
+            border-radius: 4px;
+            border: 1px solid #e5a0a0;
+            display: block;
+            margin-top: 10px;
+            padding-left: 10px; /* Override default */
+        }
+        .note-warning strong {
+            color: #c0392b; /* Match parent */
         }
         
         /* --- Style for Cite Links --- */
@@ -374,14 +391,14 @@
                  padding-left: 0;
                  padding-right: 0;
                  width: 100%;
-            }
+             }
         }
          @media (max-width: 600px) { /* Further mobile tweaks */
              header, main { padding: 20px; }
              header h1 { font-size: 1.8em; }
              .column-header { font-size: 1.5em; }
              .card-header h2 { font-size: 1.1em; }
-        }
+         }
 
     </style>
 </head>
@@ -389,19 +406,19 @@
 
     <!-- SVG Icons Definition -->
      <svg width="0" height="0" style="display:none;">
-        <symbol id="icon-dollar" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"> <line x1="12" y1="1" x2="12" y2="23"></line> <path d="M17 5H9.5a3.5 3.5 0 0 0 0 7h5a3.5 3.5 0 0 1 0 7H6"></path> </symbol>
-        <symbol id="icon-pause" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"> <rect x="6" y="4" width="4" height="16"></rect> <rect x="14" y="4" width="4" height="16"></rect> </symbol>
-        <symbol id="icon-block" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"> <circle cx="12" cy="12" r="10"></circle> <line x1="4.93" y1="4.93" x2="19.07" y2="19.07"></line> </symbol>
-        <symbol id="icon-users" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"> <path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"></path> <circle cx="9" cy="7" r="4"></circle> <path d="M23 21v-2a4 4 0 0 0-3-3.87"></path> <path d="M16 3.13a4 4 0 0 1 0 7.75"></path> </symbol>
-        <symbol id="icon-reference" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"> <path d="M2 3h6a4 4 0 0 1 4 4v14a3 3 0 0 0-3-3H2z"></path> <path d="M22 3h-6a4 4 0 0 0-4 4v14a3 3 0 0 1 3-3h7z"></path> </symbol>
-        <symbol id="icon-mind" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"> <path d="M12 2a10 10 0 0 0-3.96 19.14A10 10 0 0 0 12 22a10 10 0 0 0 3.96-2.86A10 10 0 0 0 12 2z"></path> <path d="M12 12a4 4 0 0 0-4 4"></path> <path d="M16 12a4 4 0 0 1-4 4"></path> </symbol>
-        <symbol id="icon-search" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"> <circle cx="11" cy="11" r="8"></circle> <line x1="21" y1="21" x2="16.65" y2="16.65"></line> </symbol>
-        <symbol id="icon-decision" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"> <path d="M12 22c5.523 0 10-4.477 10-10S17.523 2 12 2 2 6.477 2 12s4.477 10 10 10z"></path> <path d="M12 16.5A4.5 4.5 0 1 0 12 7.5a4.5 4.5 0 1 0 0 9z"></path> <path d="M12 2v2.5"></path><path d="M12 22v-2.5"></path> <path d="M2 12h2.5"></path><path d="M22 12h-2.5"></path> <path d="M4.93 4.93l1.768 1.768"></path><path d="M19.07 19.07l-1.768-1.768"></path> <path d="M4.93 19.07l1.768-1.768"></path><path d="M19.07 4.93l-1.768 1.768"></path> </symbol>
-        <symbol id="icon-present" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"> <rect x="2" y="3" width="20" height="14" rx="2" ry="2"></rect> <line x1="8" y1="21" x2="16" y2="21"></line> <line x1="12" y1="17" x2="12" y2="21"></line> </symbol>
-        <symbol id="icon-go" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"> <circle cx="12" cy="12" r="10"></circle> <polyline points="12 16 16 12 12 8"></polyline> <line x1="8" y1="12" x2="16" y2="12"></line> </symbol>
-        <symbol id="icon-clock" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"> <circle cx="12" cy="12" r="10"></circle> <polyline points="12 6 12 12 16 14"></polyline> </symbol>
-        <symbol id="icon-script" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"> <path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"></path> <polyline points="14 2 14 8 20 8"></polyline> <line x1="16" y1="13" x2="8" y2="13"></line> <line x1="16" y1="17" x2="8" y2="17"></line> <polyline points="10 9 9 9 8 9"></polyline> </symbol>
-    </svg>
+         <symbol id="icon-dollar" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"> <line x1="12" y1="1" x2="12" y2="23"></line> <path d="M17 5H9.5a3.5 3.5 0 0 0 0 7h5a3.5 3.5 0 0 1 0 7H6"></path> </symbol>
+         <symbol id="icon-pause" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"> <rect x="6" y="4" width="4" height="16"></rect> <rect x="14" y="4" width="4" height="16"></rect> </symbol>
+         <symbol id="icon-block" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"> <circle cx="12" cy="12" r="10"></circle> <line x1="4.93" y1="4.93" x2="19.07" y2="19.07"></line> </symbol>
+         <symbol id="icon-users" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"> <path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"></path> <circle cx="9" cy="7" r="4"></circle> <path d="M23 21v-2a4 4 0 0 0-3-3.87"></path> <path d="M16 3.13a4 4 0 0 1 0 7.75"></path> </symbol>
+         <symbol id="icon-reference" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"> <path d="M2 3h6a4 4 0 0 1 4 4v14a3 3 0 0 0-3-3H2z"></path> <path d="M22 3h-6a4 4 0 0 0-4 4v14a3 3 0 0 1 3-3h7z"></path> </symbol>
+         <symbol id="icon-mind" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"> <path d="M12 2a10 10 0 0 0-3.96 19.14A10 10 0 0 0 12 22a10 10 0 0 0 3.96-2.86A10 10 0 0 0 12 2z"></path> <path d="M12 12a4 4 0 0 0-4 4"></path> <path d="M16 12a4 4 0 0 1-4 4"></path> </symbol>
+         <symbol id="icon-search" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"> <circle cx="11" cy="11" r="8"></circle> <line x1="21" y1="21" x2="16.65" y2="16.65"></line> </symbol>
+         <symbol id="icon-decision" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"> <path d="M12 22c5.523 0 10-4.477 10-10S17.523 2 12 2 2 6.477 2 12s4.477 10 10 10z"></path> <path d="M12 16.5A4.5 4.5 0 1 0 12 7.5a4.5 4.5 0 1 0 0 9z"></path> <path d="M12 2v2.5"></path><path d="M12 22v-2.5"></path> <path d="M2 12h2.5"></path><path d="M22 12h-2.5"></path> <path d="M4.93 4.93l1.768 1.768"></path><path d="M19.07 19.07l-1.768-1.768"></path> <path d="M4.93 19.07l1.768-1.768"></path><path d="M19.07 4.93l-1.768 1.768"></path> </symbol>
+         <symbol id="icon-present" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"> <rect x="2" y="3" width="20" height="14" rx="2" ry="2"></rect> <line x1="8" y1="21" x2="16" y2="21"></line> <line x1="12" y1="17" x2="12" y2="21"></line> </symbol>
+         <symbol id="icon-go" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"> <circle cx="12" cy="12" r="10"></circle> <polyline points="12 16 16 12 12 8"></polyline> <line x1="8" y1="12" x2="16" y2="12"></line> </symbol>
+         <symbol id="icon-clock" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"> <circle cx="12" cy="12" r="10"></circle> <polyline points="12 6 12 12 16 14"></polyline> </symbol>
+         <symbol id="icon-script" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"> <path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"></path> <polyline points="14 2 14 8 20 8"></polyline> <line x1="16" y1="13" x2="8" y2="13"></line> <line x1="16" y1="17" x2="8" y2="17"></line> <polyline points="10 9 9 9 8 9"></polyline> </symbol>
+     </svg>
 
     <div class="container">
         <header>
@@ -471,7 +488,7 @@
                                     "If you have your calendar handy, I could pull out mine to <strong>book a specific time with you</strong> just so you don't have to chase me down and vice versa... <strong>would that be appropriate?</strong>"
                                 </li>
                                 <li>
-                                     <span class="note">If they resist scheduling: "I understand you're busy. Would you have just 60 seconds if I asked one quick question to see if it even makes sense for us to talk later?" (Then try the Accelerated NEPQ flow).</span>
+                                    <span class="note">If they resist scheduling: "I understand you're busy. Would you have just 60 seconds if I asked one quick question to see if it even makes sense for us to talk later?" (Then try the Accelerated NEPQ flow).</span>
                                 </li>
                             </ul>
                         </div>
@@ -631,7 +648,7 @@
 
                     <!-- CARD (13): INBOUND CALL FRAMEWORK -->
                     <details class="card card-script"> 
-                         <summary class="card-header">
+                        <summary class="card-header">
                             <svg class="card-icon" style="stroke: var(--framework-icon-stroke);"><use href="#icon-script"></use></svg>
                             <h2>Inbound Call Framework (One-Call Close)</h2>
                         </summary>
@@ -643,27 +660,27 @@
                             <!-- ADDED: Initial Opening Section -->
                             <div class="stage-header">Initial Opening <span class="stage-time">(First 15 Seconds)</span></div>
                              <div class="tone-note">Tone: Calm, neutral, professional. Pacing: Normal.</div>
-                             <ul>
+                            <ul>
                                 <li>
                                     <span class="you">You:</span> "Hey, [Lead Name]?"
                                     <span class="note">(Wait for confirmation)</span>
                                 </li>
                                  <li>
                                      <span class="you">You:</span> "Hi [Lead Name], this is [Your Name] calling from Verizon Connect on a recorded line. You had put in a request online just a bit ago about our [GPS Tracking / Dash Cams]... Is now still okay for a quick chat?"
-                                    <span class="note">This references *their* action.</span>
+                                     <span class="note">This references *their* action.</span>
                                 </li>
                                  <li>
                                      <span class="note">➡️ If they say "No, I'm busy" or "Just send pricing" -> Use the <strong>Brush-off Pivots</strong> in Column 1.</span>
-                                 </li>
-                                 <li>
-                                      <span class="note">➡️ If they say "Yes" or anything neutral -> Proceed to Stage 1 below.</span>
-                                 </li>
-                             </ul>
+                                </li>
+                                <li>
+                                     <span class="note">➡️ If they say "Yes" or anything neutral -> Proceed to Stage 1 below.</span>
+                                </li>
+                            </ul>
                             <!-- END: Initial Opening Section -->
 
                             <div class="stage-header">1. Connecting / Situation <span class="stage-time">(~0-1 Minute After Opening)</span></div>
                              <div class="tone-note">Tone: Curious, neutral (like a doctor gathering initial facts). Pacing: Normal, slightly slower than opening.</div>
-                             <ul>
+                            <ul>
                                 <li>
                                     <span class="you">You:</span> "Great. So, you were looking into [GPS Tracking / Dash Cams]... <strong>What are you doing now...</strong> for that?"<a href="blackbook.pdf#page=11" target="_blank" class="cite-link">[p. 11]</a>
                                     <span class="note">Goal: Establish their current state quickly.</span>
@@ -672,27 +689,33 @@
                                     <span class="you">You:</span> "Okay, and <strong>roughly how many vehicles</strong> are you running right now?"
                                     <span class="note">Keep tone neutral and factual here.</span>
                                  </li>
-                             </ul>
+                            </ul>
 
                             <div class="stage-header">2. Problem Awareness <span class="stage-time">(~1-5 Minutes - MOST IMPORTANT STAGE)</span></div>
-                              <div class="tone-note">Tone: Shift to genuinely curious, maybe slightly confused or skeptical, especially on follow-up probes. Pacing: Slow down here. Use pauses after their answers. Let them feel the weight of their own words.</div>
-                             <ul>
+                               <div class="tone-note">Tone: Shift to genuinely curious, maybe slightly confused or skeptical, especially on follow-up probes. Pacing: Slow down here. Use pauses after their answers. Let them feel the weight of their own words.</div>
+                            <ul>
+                                <!-- === THIS IS THE EDITED SECTION === -->
                                 <li>
-                                    <span class="you">You:</span> "Gotcha. And <strong>what do you like or... what *don't* you like</strong> about [calling drivers / using Airtags / current system]?"<a href="blackbook.pdf#page=12" target="_blank" class="cite-link">[p. 12]</a>
-                                    <span class="note">Focus on the "don't like." Use probing questions below to dig.</span>
+                                    <span class="you">You:</span> "Gotcha. And <strong>what do you like or... what *don't* you like</strong> about... [Their specific answer from Stage 1]?"<a href="blackbook.pdf#page=12" target="_blank" class="cite-link">[p. 12]</a>
+                                    <span class="note">Focus on the "don't like." <br><strong>Crucial:</strong> Repeat their *exact* system back to them. <br>Ex: "...what *don't* you like about *just calling your drivers*?" <br>Ex: "...what *don't* you like about *using those Airtags*?"</span>
                                 </li>
+                                <!-- === END OF EDITED SECTION === -->
                                  <li>
                                      <span class="you">You (Probing):</span> "When you say [it's a hassle / the reporting isn't great], <strong>how do you mean exactly?</strong>"<a href="blackbook.pdf#page=22" target="_blank" class="cite-link">[p. 22]</a> <span class="tone-note">Tone: Lean in slightly, sound genuinely curious/confused.</span>
+                                     <!-- NEW WARNING NOTE -->
+                                     <span class="note-warning">
+                                        <strong>Logic Check:</strong> Only ask this if their answer was *vague* (e.g., "it's a hassle"). If they gave a *specific* problem (e.g., "they don't answer my calls"), <strong>skip this question</strong> and go straight to "What's causing that issue?" or "Has that had an impact...".
+                                     </span>
                                  </li>
                                 <li>
-                                     <span class="you">You (Probing):</span> "<strong>What's causing that issue?</strong>"<a href="blackbook.pdf#page=22" target="_blank" class="cite-link">[p. 22]</a> <span class="tone-note">Tone: Curious detective.</span>
+                                    <span class="you">You (Probing):</span> "<strong>What's causing that issue?</strong>"<a href="blackbook.pdf#page=22" target="_blank" class="cite-link">[p. 22]</a> <span class="tone-note">Tone: Curious detective.</span>
                                 </li>
                                  <li>
                                      <span class="you">You (Probing - The KEY Pain Question):</span> "<strong>Has that had an impact on you? In what way?</strong>"<a href="blackbook.pdf#page=12" target="_blank" class="cite-link">[p. 12]</a>
-                                    <span class="note">Listen for $$$, time wasted, frustration, customer complaints, risk.</span>
-                                    <span class="tone-note">Tone: Empathetic but neutral. Pacing: Slow down, pause after asking.</span>
-                                </li>
-                             </ul>
+                                     <span class="note">Listen for $$$, time wasted, frustration, customer complaints, risk.</span>
+                                     <span class="tone-note">Tone: Empathetic but neutral. Pacing: Slow down, pause after asking.</span>
+                                 </li>
+                            </ul>
 
                             <div class="stage-header">3. Solution Awareness <span class="stage-time">(~1-2 Minutes)</span></div>
                              <div class="tone-note">Tone: Collaborative, curious. Pacing: Normal.</div>
@@ -708,17 +731,17 @@
                             </ul>
                             
                             <div class="stage-header">4. Consequence <span class="stage-time">(~1 Minute)</span></div>
-                              <div class="tone-note">Tone: Serious, slightly concerned (but NOT fear-mongering). Pacing: Slow, deliberate.</div>
-                             <ul>
+                               <div class="tone-note">Tone: Serious, slightly concerned (but NOT fear-mongering). Pacing: Slow, deliberate.</div>
+                            <ul>
                                 <li>
                                     <span class="you">You:</span> "That makes sense. <strong>What if you don't do anything about this problem</strong> and [repeat the pain - fuel costs stay high / you keep wasting time / customer complaints continue]?"<a href="blackbook.pdf#page=14" target="_blank" class="cite-link">[p. 14]</a>
                                     <span class="note">Build urgency by focusing on the negative future. Let them sit with the question.</span>
                                 </li>
-                             </ul>
-                             
+                            </ul>
+                            
                             <div class="stage-header">5. Qualifying <span class="stage-time">(~1 Minute)</span></div>
-                              <div class="tone-note">Tone: Direct but neutral for the first question. Shift to skeptical/curious for "Why now?". Pacing: Normal, pause after "Why now?".</div>
-                             <ul>
+                               <div class="tone-note">Tone: Direct but neutral for the first question. Shift to skeptical/curious for "Why now?". Pacing: Normal, pause after "Why now?".</div>
+                            <ul>
                                 <li>
                                     <span class="you">You:</span> "So, <strong>how important is it for you to solve this problem?</strong>"<a href="blackbook.pdf#page=14" target="_blank" class="cite-link">[p. 14]</a>
                                 </li>
@@ -726,22 +749,22 @@
                                      <span class="you">You (Crucial follow-up):</span> "<strong>Why is that important to you *now* though?</strong>"<a href="blackbook.pdf#page=14" target="_blank" class="cite-link">[p. 14]</a>
                                      <span class="note">This confirms their urgency and emotional driver.</span>
                                 </li>
-                             </ul>
-                             
+                            </ul>
+                            
                              <div class="stage-header">6. Uncover Decision Process <span class="stage-time">(~1 Minute)</span></div>
-                              <div class="tone-note">Tone: Neutral, information-gathering, like checking boxes. Pacing: Normal.</div>
-                             <ul>
+                               <div class="tone-note">Tone: Neutral, information-gathering, like checking boxes. Pacing: Normal.</div>
+                            <ul>
                                  <li>
                                      <span class="you">You:</span> "Before I show you how we might be able to help... <strong>Can you walk me through the criteria you use</strong> when picking a company for something like this?"<a href="blackbook.pdf#page=24" target="_blank" class="cite-link">[p. 24]</a>
                                  </li>
-                                  <li>
+                                 <li>
                                      <span class="you">You:</span> "And besides yourself, <strong>who else might be involved</strong> in making a final decision?"<a href="blackbook.pdf#page=31" target="_blank" class="cite-link">[p. 31]</a>
                                      <span class="note">Don't skip this - avoids "I need to talk to my boss" later.</span>
                                  </li>
-                             </ul>
+                            </ul>
 
                             <div class="stage-header">7. Transition <span class="stage-time">(~30 Seconds)</span></div>
-                             <div class="tone-note">Tone: Helpful, bridging. Ask "Why do you feel it is though?" with genuine curiosity/slight skepticism - make them convince YOU. Pacing: Smooth, connecting pace.</div>
+                              <div class="tone-note">Tone: Helpful, bridging. Ask "Why do you feel it is though?" with genuine curiosity/slight skepticism - make them convince YOU. Pacing: Smooth, connecting pace.</div>
                             <ul>
                                 <li>
                                     <span class="you">You:</span> "Okay, based on what you told me about [problem 1] and how it's making you feel [emotion/impact], and how you're looking for [their ideal solution]... what we do might actually work for you... [Briefly mention the core benefit related to their pain]... <strong>Does that feel as if it might be what you're looking for?</strong>"<a href="blackbook.pdf#page=15" target="_blank" class="cite-link">[p. 15]</a>
@@ -751,35 +774,35 @@
                                     <span class="you">You (Crucial follow-up):</span> "<strong>Why do you feel like it is though?</strong>"<a href="blackbook.pdf#page=15" target="_blank" class="cite-link">[p. 15]</a>
                                     <span class="note">Makes them sell themselves on why it's a fit.</span>
                                 </li>
-                             </ul>
-                             
+                            </ul>
+                            
                              <div class="stage-header">8. "Presenting" / Confirming <span class="stage-time">(~2-5+ Minutes)</span></div>
-                              <div class="tone-note">Tone: Collaborative, confirming, checking understanding. Pacing: Conversational, use pauses after each "Checking" question.</div>
-                             <ul>
+                               <div class="tone-note">Tone: Collaborative, confirming, checking understanding. Pacing: Conversational, use pauses after each "Checking" question.</div>
+                            <ul>
                                  <li>
                                      <span class="note">Only NOW do you briefly show/explain *only* the parts of Verizon Connect that solve their *specific* stated problems. Use "Checking for Agreement" questions constantly.</span><a href="blackbook.pdf#page=39" target="_blank" class="cite-link">[p. 39]</a>
                                      <span class="you">You:</span> "...so you can see the live map here... <strong>Do you see how that could help you</strong> avoid those customer calls?"<a href="blackbook.pdf#page=39" target="_blank" class="cite-link">[p. 39]</a>
                                      <span class="you">You:</span> "...and this report shows idling time... <strong>How do you see that helping you</strong> the most with fuel costs?"<a href="blackbook.pdf#page=40" target="_blank" class="cite-link">[p. 40]</a>
                                  </li>
-                             </ul>
-                             
+                            </ul>
+                            
                             <div class="stage-header">9. Committing <span class="stage-time">(~1-2 Minutes)</span></div>
-                             <div class="tone-note">Tone: Calmly assumptive for "The Close" statement. Ask "Why though?" with curiosity. Final question ("Would that be appropriate?") is neutral, low-pressure, giving them control. Pacing: Calm, clear, slightly slower.</div>
+                              <div class="tone-note">Tone: Calmly assumptive for "The Close" statement. Ask "Why though?" with curiosity. Final question ("Would that be appropriate?") is neutral, low-pressure, giving them control. Pacing: Calm, clear, slightly slower.</div>
                             <ul>
                                 <li>
                                     <span class="you">You:</span> "So, <strong>do you feel like this could be the answer for you?</strong>"<a href="blackbook.pdf#page=15" target="_blank" class="cite-link">[p. 15]</a>
                                 </li>
                                 <li>
-                                     <span class="you">You (Crucial follow-up):</span> "<strong>Why though?</strong>"<a href="blackbook.pdf#page=15" target="_blank" class="cite-link">[p. 15]</a>
-                                     <span class="note">Again, makes them sell themselves.</span>
+                                    <span class="you">You (Crucial follow-up):</span> "<strong>Why though?</strong>"<a href="blackbook.pdf#page=15" target="_blank" class="cite-link">[p. 15]</a>
+                                    <span class="note">Again, makes them sell themselves.</span>
                                 </li>
                                 <li>
                                      <span class="you">You (The Close - UPDATED):</span> "Well, I don't have anything else to go over with you, it looks like we covered what you're looking for. Really, the next step is pretty simple. I just need to confirm the best shipping address for the equipment and your preferred billing method—we can do ACH or credit card. Once I have that, I'll send over a quick DocuSign agreement. After you sign that, you can just send over the VIN numbers for the vehicles, and we'll get everything scheduled for you." <span class="note">(Adjust details as needed)</span><a href="blackbook.pdf#page=15" target="_blank" class="cite-link">[p. 15 - adapted]</a>
-                                </li>
+                                 </li>
                                 <li>
                                      <span class="you">You (Final Question):</span> "<strong>Would that be appropriate, or how would you like to proceed from here?</strong>"<a href="blackbook.pdf#page=16" target="_blank" class="cite-link">[p. 16]</a>
-                                </li>
-                             </ul>
+                                 </li>
+                            </ul>
                         </div>
                     </details>
                     
