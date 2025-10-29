@@ -163,41 +163,42 @@
             font-family: "Courier New", Courier, monospace;
         }
         
-        /* --- NEW STYLES FOR THE "GO" CARD --- */
-        .card-go .card-header {
-            background-color: #e8f8f5;
-        }
-        .card-go .card-header h2 {
-            color: #16a085; /* Green */
-            font-style: normal;
-            font-weight: 600;
-        }
-        .card-go[open] .card-header {
-            background-color: #e0f5f0;
-        }
-        .card-go .card-header::before {
-            color: #16a085;
-        }
-        .card-go .card-body li::before {
-            color: #16a085;
-        }
-        .card-go .card-body strong {
-            color: #2c3e50; /* Dark blue for emphasis */
-        }
-        .card-go .card-body .example-dialog {
-            background: #f4f7f6;
-            padding: 15px;
-            border-radius: 8px;
-            margin-top: 10px;
-        }
-        .card-go .card-body .example-dialog .you {
-            font-weight: bold;
-            color: #16a085;
-        }
-        .card-go .card-body .example-dialog .prospect {
-            font-weight: bold;
-            color: #2980b9;
-        }
+        /* --- STYLES FOR "MINDSET" CARD --- */
+        .card-mindset .card-header { background-color: #f4f6f7; }
+        .card-mindset .card-header h2 { color: #34495e; font-style: normal; font-weight: 600; }
+        .card-mindset[open] .card-header { background-color: #eef2f4; }
+        .card-mindset .card-header::before { color: #34495e; }
+        .card-mindset .card-body li::before { color: #34495e; }
+        .card-mindset .card-body strong { color: #c0392b; } /* Red for "DON'T" */
+
+        /* --- STYLES FOR "HOW TO" CARD (PURPLE) --- */
+        .card-how .card-header { background-color: #f4eef7; }
+        .card-how .card-header h2 { color: #8e44ad; font-style: normal; font-weight: 600; }
+        .card-how[open] .card-header { background-color: #f0e6f5; }
+        .card-how .card-header::before { color: #8e44ad; }
+        .card-how .card-body li::before { color: #8e44ad; }
+        
+        /* --- STYLES FOR "DIG DEEPER" CARD --- */
+        .card-dig .card-header { background-color: #fef5e7; }
+        .card-dig .card-header h2 { color: #e67e22; font-style: normal; font-weight: 600; }
+        .card-dig[open] .card-header { background-color: #fdf0d5; }
+        .card-dig .card-header::before { color: #e67e22; }
+        .card-dig .card-body li::before { color: #e67e22; }
+        
+        /* --- STYLES FOR "BUDGET" CARD --- */
+        .card-budget .card-header { background-color: #f8f9f9; }
+        .card-budget .card-header h2 { color: #2980b9; font-style: italic; }
+        
+        /* --- STYLES FOR THE "GO" CARD --- */
+        .card-go .card-header { background-color: #e8f8f5; }
+        .card-go .card-header h2 { color: #16a085; font-style: normal; font-weight: 600; }
+        .card-go[open] .card-header { background-color: #e0f5f0; }
+        .card-go .card-header::before { color: #16a085; }
+        .card-go .card-body li::before { color: #16a085; }
+        .card-go .card-body strong { color: #2c3e50; }
+        .card-go .card-body .example-dialog { background: #f4f7f6; padding: 15px; border-radius: 8px; margin-top: 10px; }
+        .card-go .card-body .you { font-weight: bold; color: #16a085; }
+        .card-go .card-body .prospect { font-weight: bold; color: #2980b9; }
 
     </style>
 </head>
@@ -211,7 +212,7 @@
 
         <main>
             <!-- CARD 1: PRICING -->
-            <details class="card">
+            <details class="card card-budget">
                 <summary class="card-header">
                     <h2>"I'm just looking for pricing." or "Can you just send me a quote?"</h2>
                 </summary>
@@ -242,7 +243,7 @@
             </details>
 
             <!-- CARD 2: BUSY -->
-            <details class="card">
+            <details class="card card-budget">
                 <summary class="card-header">
                     <h2>"I'm too busy right now." or "Can you call me back later?"</h2>
                 </summary>
@@ -265,7 +266,7 @@
             </details>
 
             <!-- CARD 3: NO PRIORITY -->
-            <details class="card">
+            <details class="card card-budget">
                 <summary class="card-header">
                     <h2>"This isn't a priority for me right now." or "I'm not interested."</h2>
                 </summary>
@@ -291,7 +292,7 @@
             </details>
 
             <!-- CARD 4: COMPETITOR -->
-            <details class="card">
+            <details class="card card-budget">
                 <summary class="card-header">
                     <h2>"We're already using [Competitor]." or "We have a vendor for that."</h2>
                 </summary>
@@ -317,7 +318,181 @@
                 </div>
             </details>
             
-            <!-- NEW CARD 5: THE ONE-CALL CLOSE FRAMEWORK -->
+            <!-- NEW CARD: "SEND ME REFERENCES" -->
+            <details class="card card-budget">
+                <summary class="card-header">
+                    <h2>"Can you send me some references?"</h2>
+                </summary>
+                <div class="card-body">
+                    <span class="principle">
+                        Core NEPQ Principle: This is often a way to get rid of you. You must qualify their intent and secure a next step. <span class="cite">[cite: 711]</span>
+                    </span>
+                    <ul>
+                        <li>
+                            "That's not a problem, I'm curious <strong>what would you like to ask them when you call?</strong>"
+                            <span class="note">(This uncovers their real concern.)</span> <span class="cite">[cite: 716]</span>
+                        </li>
+                        <li>
+                            "So that I can send the right people to you, <strong>what specifically would you like to discuss with them?</strong>" <span class="cite">[cite: 719]</span>
+                        </li>
+                        <li>
+                            "I can reach out to them... Now, <strong>let's pretend for a moment that the clients you talk to say good things... where do you think we should go from there?</strong>"
+                            <span class="note">(This is the key qualifying/commitment question.)</span> <span class="cite">[cite: 726]</span>
+                        </li>
+                    </ul>
+                </div>
+            </details>
+            
+            <!-- NEW CARD: MINDSET -->
+            <details class="card card-mindset" open>
+                <summary class="card-header">
+                    <h2>Your NEPQ Mindset: Problem Finder, Not Product Pusher</h2>
+                </summary>
+                <div class="card-body">
+                    <span class="principle">
+                        Your goal is to help them find a problem they didn't know they had, or one they didn't know they could solve.
+                    </span>
+                    <ul>
+                        <li>
+                            You are a "Trusted Authority" and a "Problem Finder," like a doctor.
+                        </li>
+                        <li>
+                            You are <strong>NOT</strong> a "product pusher."
+                        </li>
+                        <li>
+                            You are here to ask questions and *diagnose*, not to pitch, present, or persuade.
+                        </li>
+                        <li>
+                            People buy on **emotion** (pain) and justify with logic. Your job is to find the *emotional* reason for change.
+                        </li>
+                        <li>
+                            <strong>DON'T</strong> talk about your products (GPS, dash cams). <strong>DO</strong> ask questions about their problems (fuel costs, driver behavior, lost time).
+                        </li>
+                        <li>
+                            Your <strong>TONE</strong> is more important than your words. Be <strong>neutral</strong>, <strong>calm</strong>, and <strong>curious</strong> (like a doctor), not "salesy" or "enthusiastic."
+                        </li>
+                        <li>
+                            Use a <strong>skeptical</strong> or <strong>confused</strong> tone when asking "why" questions to pull out more emotion.
+                        </li>
+                        <li>
+                            <strong>Without pain, there is no sale.</strong>
+                        </li>
+                    </ul>
+                </div>
+            </details>
+            
+            <!-- NEW CARD: DIG DEEPER -->
+            <details class="card card-dig">
+                <summary class="card-header">
+                    <h2>How to Dig Deeper (Probing & Clarifying Questions)</h2>
+                </summary>
+                <div class="card-body">
+                    <span class="principle">
+                        Use these when you get short, logical, or vague answers. These questions find the *emotion* and *pain*.
+                    </span>
+                    <ul>
+                        <li>
+                            "<strong>Tell me more...</strong>" <span class="cite">[cite: 379]</span>
+                        </li>
+                        <li>
+                            "<strong>How do you mean exactly?</strong>" <span class="cite">[cite: 317]</span>
+                        </li>
+                        <li>
+                            "<strong>Can you be more specific? Give me an example...</strong>" <span class="cite">[cite: 323]</span>
+                        </li>
+                        <li>
+                            "<strong>What's causing this issue?</strong>" <span class="cite">[cite: 318]</span>
+                        </li>
+                         <li>
+                            "<strong>Why so important now?</strong>" <span class="cite">[cite: 322]</span>
+                        </li>
+                        <li>
+                            "<strong>Has that had an impact on you? In what way?</strong>" <span class="cite">[cite: 147]</span>
+                        </li>
+                        <li>
+                            "<strong>How did you feel about that?</strong>" <span class="cite">[cite: 391]</span>
+                        </li>
+                        <li>
+                            "<strong>What would this do for you personally?</strong>" <span class="cite">[cite: 329]</span>
+                        </li>
+                    </ul>
+                </div>
+            </details>
+            
+            <!-- NEW CARD: "DECISION PROCESS" -->
+            <details class="card card-how">
+                <summary class="card-header">
+                    <h2>How to Uncover the Decision Process</h2>
+                </summary>
+                <div class="card-body">
+                    <span class="principle">
+                        Use these *before* the transition to understand *how* they buy, so you don't get stuck later.
+                    </span>
+                    <ul>
+                        <li>
+                            "<strong>Can you walk me through the criteria you use</strong> when picking a company to solve these issues...?" <span class="cite">[cite: 366]</span>
+                        </li>
+                        <li>
+                            "<strong>Let's suppose you are looking at several different companies</strong> who all meet your criteria, including price. <strong>How would you then decide what to do?</strong>" <span class="cite">[cite: 369]</span>
+                        </li>
+                        <li>
+                            "In addition to you, <strong>who else recognizes that this is a major problem</strong> in the company?" <span class="cite">[cite: 472]</span>
+                        </li>
+                        <li>
+                            "Who else besides you would be <strong>involved in approving the budget</strong> to solve this?" <span class="cite">[cite: 517]</span>
+                        </li>
+                    </ul>
+                </div>
+            </details>
+            
+            <!-- NEW CARD: NO BUDGET -->
+            <details class="card card-budget">
+                <summary class="card-header">
+                    <h2>"We don't have the budget for this." or "That's too expensive."</h2>
+                </summary>
+                <div class="card-body">
+                    <span class="principle">
+                        This means you haven't built enough value by finding their *pain*. The problem you've found isn't big enough (yet).
+                    </span>
+                    <ul>
+                        <li>
+                            "And I can appreciate that money might be an issue... from what you told me, <strong>how do you think you can resolve that</strong> so that you can..." <span class="note">[Repeat back the solution they said they wanted]</span> <span class="cite">[cite: 524-525]</span>
+                        </li>
+                        <li>
+                            "You had mentioned that the most important thing to you is cost, <strong>can I ask how that compares to you actually getting results</strong> and being able to solve this problem though?" <span class="cite">[cite: 371-372]</span>
+                        </li>
+                        <li>
+                            "Tell me, <strong>if you *did* have the funding... is this something that would work for you?</strong> ...Why do you feel it would though?" <span class="cite">[cite: 522-523]</span>
+                        </li>
+                        <li>
+                            "If you don't decide to address this problem now, <strong>how much will it cost you this year in lost...</strong> [profit/fuel/etc]?" <span class="cite">[cite: 489]</span>
+                        </li>
+                    </ul>
+                </div>
+            </details>
+            
+            <!-- NEW CARD: "HOW TO PRESENT" -->
+            <details class="card card-how">
+                <summary class="card-header">
+                    <h2>How to "Present" (by NOT Presenting)</h2>
+                </summary>
+                <div class="card-body">
+                    <span class="principle">
+                        After the "Transition Question," your "presentation" is just proving you can solve their stated problems. Ask these "Checking for Agreement" questions *constantly*. <span class="cite">[cite: 633, 649]</span>
+                    </span>
+                    <ul>
+                        <li>"<strong>Does that make sense?</strong>" <span class="cite">[cite: 641]</span></li>
+                        <li>"<strong>Are we on the same page?</strong>" <span class="cite">[cite: 642]</span></li>
+                        <li>"<strong>What are your thoughts on that?</strong>" <span class="cite">[cite: 643]</span></li>
+                        <li>"<strong>Are you with me on this?</strong>" <span class-"cite">[cite: 644]</span></li>
+                        <li>"<strong>Do you see how that works?</strong>" <span class="cite">[cite: 645]</span></li>
+                        <li>"<strong>Do you see how that could help you?</strong>" <span class="cite">[cite: 646]</span></li>
+                        <li>"<strong>How do you see that helping you the most?</strong>" <span class="cite">[cite: 651]</span></li>
+                    </ul>
+                </div>
+            </details>
+            
+            <!-- THE ONE-CALL CLOSE FRAMEWORK -->
             <details class="card card-go" open> <!-- 'open' makes it default to open -->
                 <summary class="card-header">
                     <h2>What to do AFTER you pivot (The One-Call Close Framework)</h2>
@@ -374,4 +549,5 @@
 
 </body>
 </html>
+
 
